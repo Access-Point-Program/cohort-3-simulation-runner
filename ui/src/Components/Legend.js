@@ -21,7 +21,7 @@ function Legend() {
   };
 
   return (
-    <div style={legendStyle}>
+    <div style={legendStyle} data-testid="legend">
       <div style={legendItemStyle}>
         <div style={{ ...colorBlockStyle, backgroundColor: "white" }}></div>
         <span> Outside Wall </span>

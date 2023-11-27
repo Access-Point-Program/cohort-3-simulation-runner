@@ -12,7 +12,7 @@ import "./Sidebar.css";
 function SideBar({ currentPage = "dashboard" }) {
   return (
     <Card className="side-bar " bg="dark" text="light">
-      <div>
+      <div data-testid="sidebar">
         <Card.Title>
           <RiRobot2Fill />
           Capstone Project

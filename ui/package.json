@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^9.3.3",
     "mocker-api": "^2.9.8"
   },
   "author": "",

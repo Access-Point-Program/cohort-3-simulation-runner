@@ -51,7 +51,11 @@ function Grid({ data }) {
     </div>
   ));
 
-  return <div className="maze">{gridJSX}</div>;
+  return (
+    <div className="maze" data-testid="grid">
+      {gridJSX}
+    </div>
+  );
 }
 
 export default Grid;

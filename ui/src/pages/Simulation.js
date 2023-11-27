@@ -19,7 +19,7 @@ function Simulation() {
   };
 
   return (
-    <div>
+    <div data-testid="simulation">
       <h1>Simulation Page</h1>
 
       <div className="content-container">

@@ -32,7 +32,7 @@ function Settings({ layout, onSelect, ruleset }) {
   }, [ruleset]);
 
   const handleLayoutSelection = (selectedOption) => {
-    setSelectedLayout(selectedOption);
+    nsetSelectedLayout(selectedOption);
     onSelect(layout[selectedOption.value]);
   };
 
@@ -40,7 +40,7 @@ function Settings({ layout, onSelect, ruleset }) {
   console.log(selectedRuleset);
 
   return (
-    <div>
+    <div data-testid="settings">
       <h2>Settings</h2>
       <Select
         value={selectedLayout}
