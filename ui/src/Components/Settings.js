@@ -38,9 +38,6 @@ function Settings({ layout, onSelect, ruleset }) {
     onSelect(layout[selectedOption.value]);
   };
 
-  console.log(selectedLayout);
-  console.log(selectedRuleset);
-
   return (
     <div>
       <h2>Settings</h2>
