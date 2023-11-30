@@ -1,4 +1,4 @@
-package com.HocusPocus.Simulation;
+package com.HocusPocus.Simulation.simulationDb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

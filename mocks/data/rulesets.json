@@ -1,11 +1,47 @@
 [
- { "id": 1, "name": "Mock Ruleset 1", "creation_date": "Mon, 01 Nov 2023 20:33:59 GMT"},
-  { "id": 2, "name": "Mock Ruleset 2", "creation_date": "Mon, 02 Nov 2023 20:33:59 GMT"},
-  {  "id": 3, "name": "Mock Ruleset 3", "creation_date": "Mon, 03 Nov 2023 20:33:59 GMT" },
-  { "id": 4, "name": "Mock Ruleset 4", "creation_date": "Mon, 04 Nov 2023 20:33:59 GMT"},
-  { "id": 5, "name": "Mock Ruleset 5", "creation_date": "Mon, 05 Nov 2023 20:33:59 GMT"},
-  { "id": 6, "name": "Mock Ruleset 6", "creation_date": "Mon, 06 Nov 2023 20:33:59 GMT"},
-  { "id": 7, "name": "Mock Ruleset 7", "creation_date": "Mon, 07 Nov 2023 20:33:59 GMT"},
-  { "id": 8, "name": "Mock Ruleset 8", "creation_date": "Mon, 08 Nov 2023 20:33:59 GMT"},
-  { "id": 9, "name": "Mock Ruleset 9", "creation_date": "Mon, 09 Nov 2023 20:33:59 GMT"}
+  {
+    "id": 1,
+    "name": "Mock Ruleset 1",
+    "creation_date": "Mon, 01 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 2,
+    "name": "Mock Ruleset 2",
+    "creation_date": "Mon, 02 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 3,
+    "name": "Mock Ruleset 3",
+    "creation_date": "Mon, 03 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 4,
+    "name": "Mock Ruleset 4",
+    "creation_date": "Mon, 04 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 5,
+    "name": "Mock Ruleset 5",
+    "creation_date": "Mon, 05 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 6,
+    "name": "Mock Ruleset 6",
+    "creation_date": "Mon, 06 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 7,
+    "name": "Mock Ruleset 7",
+    "creation_date": "Mon, 07 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 8,
+    "name": "Mock Ruleset 8",
+    "creation_date": "Mon, 08 Nov 2023 20:33:59 GMT"
+  },
+  {
+    "id": 9,
+    "name": "Mock Ruleset 9",
+    "creation_date": "Mon, 09 Nov 2023 20:33:59 GMT"
+  }
 ]
