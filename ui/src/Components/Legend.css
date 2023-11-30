@@ -1,0 +1,90 @@
+
+.legend-container {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    position: relative;
+    margin-left: 15px;
+    margin-bottom: 40px;
+    height: 980px;
+    width: 965px;
+    margin-top: 24px;
+  }
+  
+.legend-title {
+    font-size: 1.1em;
+    border-bottom: 1px solid grey;
+    padding-bottom: 13px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 3.5%;
+    left: 50%; /* Adjust the left margin */
+    right: -38%; /* Adjust the right margin */
+    transform: translate(-50%, -50%);
+    color: rgb(117, 117, 117);
+}
+  
+  .legend-subtitle {
+    font-size: 1.2em;
+    border-bottom: 0px solid grey;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    position: absolute;
+    top: 10.9%;
+    left: 9.7%;
+    transform: translate(-50%, -50%);
+    color: rgb(117, 117, 117);
+  }
+  
+  .legend-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-top: 75px;
+    margin: 37px;
+    margin-right: 38px;
+  }
+  
+  .legend-color-block {
+    width: 60px;
+    height: 50px;
+    margin-left: 9px;
+    margin-right: 9px;
+    margin: 9px;
+    margin-top: 40px;
+    margin-bottom: 38px;
+    border: 0px solid #000;
+  }
+  
+  .open-color {
+    background-color: rgb(187, 202, 187);
+  }
+  
+  .walls-color {
+    background-color: grey;
+  }
+  
+  .robot-color {
+    background-color: green;
+  }
+  
+  .end-color {
+    background-color: red;
+  }
+  
+  .moves-subtitle {
+    font-size: 1.2em;
+    border-bottom: 0px solid grey;
+    padding-bottom: 10px;
+    margin-bottom: -100px;
+    position: absolute;
+    top: 58.9%;
+    left: 9.3%;
+    transform: translate(-50%, -50%);
+    color: rgb(117, 117, 117);
+  }
+  

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
+import { Form, Dropdown } from 'react-bootstrap'; // Add Dropdown from react-bootstrap
+import "./settings.css";
 
 function Settings({ layout, onSelect, ruleset }) {
   const [selectedLayout, setSelectedLayout] = useState(null);
@@ -42,35 +43,54 @@ function Settings({ layout, onSelect, ruleset }) {
   console.log(selectedRuleset);
 
   return (
-    <div>
-      <h2>Settings</h2>
+    <Form className="settings-form">
+      <h3 className="settings-title">Settings</h3>
+      
+      <div className="settings-divider"></div> 
+
       <Select
+        className="settings-select"
         value={selectedLayout}
         onChange={handleLayoutSelection}
         options={layoutOptions}
       />
 
-      {/* Assuming you want to display ruleset options as well */}
+      <div className="settings-divider"></div> 
+    
       <Select
+        className="settings-select"
         value={selectedRuleset}
         onChange={(selectedOption) => setSelectedRuleset(selectedOption)}
         options={rulesetOptions}
       />
 
-      <Form.Group controlId="maxIt">
+      <div className="settings-divider"></div> 
+
+      <Form.Group controlId="maxIt" className="settings-maxIt">
         <Form.Control
           required
           name="maxIt"
           type="number"
           placeholder="Max Iteration"
         />
+        
         <Form.Control.Feedback type="invalid">Check!</Form.Control.Feedback>
       </Form.Group>
-      <div className="runButton">
-        <button type="button">Run Simulation</button>
+
+      <div className="settings-runButton">
+        <button type="button" className="settings-button">Run Simulation</button>
       </div>
-    </div>
-  );
+
+      {/* Additional dropdown */}
+      <div className="dropdown">
+        <a className="btn text-light" href="#" onClick={(e) => this.handleOption(e)}>Open dropdown</a>
+        <div className="dropdown-menu dropdown-menu-left dropdown-menu-arrow">
+          <a className="dropdown-item" href="#">Edit</a>
+          <a className="dropdown-item" href="#">Delete</a>
+        </div>
+      </div>
+    </Form>
+  );  
 }
 
 export default Settings;
