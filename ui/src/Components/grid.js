@@ -20,38 +20,22 @@ function Grid({ data }) {
     }
   }, [data]);
 
-  function getColor(cellValue) {
-    switch (cellValue) {
-      case 0:
-        return "white"; // Plain (white)
-      case 1:
-        return "rgba(110, 110, 113, 0.371)"; // Walls (faded grey)
-      case 2:
-        return "black"; // Robot current position (black)
-      case 3:
-        return "rgb(187, 202, 187)"; // Path color (light green)
-      case 4:
-        return "rgb(255, 157, 158)"; // End Goal (light red)
-      case 5:
-        return "green"; // Robot starting Position (dark green)
-      default:
-        return "white"; // Default color
-    }
-  }
-
   const gridJSX = maze.map((row, rowIndex) => (
     <div key={rowIndex} className="maze-row">
       {row.map((cell, columnIndex) => (
         <div
           key={columnIndex}
-          className="cell"
-          style={{ backgroundColor: getColor(cell) }}
+          className={`cell cell-${cell}`}
         />
       ))}
     </div>
   ));
 
-  return <div className="maze">{gridJSX}</div>;
+  return (
+    <div className="maze container">
+      {gridJSX}
+    </div>
+  );
 }
 
 export default Grid;

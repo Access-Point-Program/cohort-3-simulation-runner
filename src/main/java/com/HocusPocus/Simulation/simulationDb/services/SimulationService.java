@@ -1,7 +1,8 @@
-package com.HocusPocus.Simulation;
+package com.HocusPocus.Simulation.simulationDb.services;
 
-import com.HocusPocus.Simulation.repo.SimulationRepo;
+
 import com.HocusPocus.Simulation.simulationDb.SimulationResults;
+import com.HocusPocus.Simulation.simulationDb.repo.SimulationRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

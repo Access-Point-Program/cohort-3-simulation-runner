@@ -1,5 +1,6 @@
 package com.HocusPocus.Simulation.simulationDb;
 
+import com.HocusPocus.Simulation.simulationDb.models.Layout;
 import jakarta.persistence.*;
 
 @Entity
