@@ -1,15 +1,22 @@
-let mockLayouts = require("./data/layouts.json");\
-let getAllLayouts = require("./com.HocusPocus.Simulation.simulationDb.controller.LayoutController")
-let getLayoutsById = require("./com.HocusPocus.Simulation.simulationDb.controller.LayoutController")
+let mockLayouts = require("./data/layouts.json");
 
 
 const proxy = {
-  "GET /layouts": (getAllLayouts, res) => {
+  _proxy: {
+    changeHost: true,
+    httpProxy: {
+      options: {
+        ignorePath: true,
+      },
+    },
+  },
+
+  "GET /layouts": (_, res) => {
     res.json(mockLayouts);
   },
-  "GET /layouts/:id": (getLayoutsById, res) => {
-    mockLayouts = mockLayouts.filter(({ id }) => id != getLayoutsById.params.id);
+  "GET /layouts/:id": (req, res) => {
+    mockLayouts = mockLayouts.filter(({ id }) => id != req.params.id);
     res.send();
-  },
+  }
 };
 module.exports = proxy;
