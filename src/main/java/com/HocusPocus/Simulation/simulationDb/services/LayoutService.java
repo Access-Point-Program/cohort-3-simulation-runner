@@ -18,7 +18,11 @@ public class LayoutService {
     private WebClient webClient;
 
     public List<Layout> getAllLayouts() {
-        return layoutsRepo.findAll();
+        return this.webClient.get()
+                .uri("http://localhost:9003/layouts/")
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<Layout>>() {})
+                .block();
     }
 
     public Optional<Layout> getLayoutsById(Long id) {
