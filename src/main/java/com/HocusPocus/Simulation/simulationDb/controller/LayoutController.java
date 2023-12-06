@@ -21,9 +21,4 @@ public class LayoutController {
                 .body(this.layoutService.getAllLayouts());
     }
 
-    @GetMapping("layout/{id}")
-    public ResponseEntity<Optional<Layout>> getLayoutsById(@PathVariable Long id) {
-        return ResponseEntity.ok()
-                .body(this.layoutService.getLayoutById(id));
-    }
 }
