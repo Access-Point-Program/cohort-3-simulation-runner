@@ -7,6 +7,7 @@ import "./settings.css";
 import { useSelector, useDispatch } from 'react-redux'
 import { updateLayout, updateRuleset, updateMaxIterations } from '../store/settingsSlice';
 import { useGetRuleSetsQuery } from '../store/ruleSetsSlice';
+import { useGetLayOutsQuery } from '../store/layOutsSlice';
 
 function Settings() {
   // Hooks
@@ -40,6 +41,7 @@ function Settings() {
         value={selectedLayoutOption}
         onChange={onSelectLayout}
         options={layoutOptions}
+        placeholder="Layout"
       />
       <div className="settings-divider"></div>
       <Select
@@ -50,6 +52,7 @@ function Settings() {
         // Question why are we disabling this select when it's loading or an error?
         isDisabled={isLoading || error}
         isLoading={isLoading}
+        placeholder="Ruleset"
       />
       <div className="settings-divider"></div>
       <Form.Group controlId="maxIt" className="settings-maxIt">
@@ -65,15 +68,6 @@ function Settings() {
       <div className="settings-runButton">
         {/* STOP AND ASK BEFORE YOU IMPLEMENT THIS!! Story #46 */}
         <button type="button" className="settings-button">Run Simulation</button>
-      </div>
-
-      {/* Additional dropdown */}
-      <div className="dropdown">
-        <a className="btn text-light" href="#" onClick={(e) => this.handleOption(e)}>Open dropdown</a>
-        <div className="dropdown-menu dropdown-menu-left dropdown-menu-arrow">
-          <a className="dropdown-item" href="#">Edit</a>
-          <a className="dropdown-item" href="#">Delete</a>
-        </div>
       </div>
     </Form >
   );
