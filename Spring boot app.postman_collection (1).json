@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "d3dd4bce-bb20-4c5e-99d9-1c6cb7f2c023",
+		"name": "Spring boot app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22368365",
+		"_collection_link": "https://red-zodiac-623362.postman.co/workspace/30-Days-of-postman~3e611b1b-961a-4e79-8be5-16011edca661/collection/22368365-d3dd4bce-bb20-4c5e-99d9-1c6cb7f2c023?action=share&source=collection_link&creator=22368365"
+	},
+	"item": [
+		{
+			"name": "Layouts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9010/layout/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9010",
+					"path": [
+						"layout",
+						""
+					]
+				},
+				"description": "```\n@RequestMapping(\"/layout\")\n @GetMapping(\"layout/{id}\")\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Rulesets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/ruleset/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ruleset",
+						""
+					]
+				},
+				"description": "```\n@RequestMapping(path=\"/ruleset\")\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Sim",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:9010/results/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9010",
+					"path": [
+						"results",
+						""
+					]
+				},
+				"description": "@RequestMapping(\"/results\")  \n@GetMapping(\"results/{id}\")  \n@PutMapping(\"results/{id}\")  \n@DeleteMapping(\"results/{id}\")"
+			},
+			"response": []
+		}
+	]
+}
