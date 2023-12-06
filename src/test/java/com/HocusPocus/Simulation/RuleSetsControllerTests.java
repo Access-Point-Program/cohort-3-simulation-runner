@@ -87,4 +87,13 @@ public class RuleSetsControllerTests {
                 .body("[1]", hasEntry("name", "Carol"))
                 .body("[1]", hasEntry("creationDate", "10/25/3023"));
     }
+
+    @Test
+    public void whenDeleteRuleset_thenRespondWithNoContent() {
+        Long rulesetIdToDelete = 1L;
+        given()
+                .pathParam("id", rulesetIdToDelete)
+                .when().delete("/ruleset/{id}")
+                .then().statusCode(204);
+    }
 }
