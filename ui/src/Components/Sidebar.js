@@ -15,9 +15,9 @@ function SideBar({ currentPage = "simulation" }) {
       <div>
         <Card.Title>
           <RiRobot2Fill />
-          Capstone Project
+          <div>Capstone Project</div>
         </Card.Title>
-        <ColoredLine color="white" />
+        <ColoredLine color=" white" />
         <Button
           href="Dashboard"
           variant={

@@ -67,8 +67,8 @@ function Settings() {
       </Form.Group>
       <div className="settings-runButton">
         {/* STOP AND ASK BEFORE YOU IMPLEMENT THIS!! Story #46 */}
-        <button type="button" className="settings-button">Run Simulation</button>
-      </div>
+        <button type="button" class="btn btn-primary">Run Simulation</button>
+      </div> 
     </Form >
   );
 }

@@ -1,5 +1,5 @@
 .side-bar {
-    border-radius: 0;
+    border-radius: 0px !important;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -8,33 +8,43 @@
 }
 /** min height change, change position */
 .side-bar>div {
+    border-radius: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 17rem;
+    padding-top: 4.5%;
+    padding-bottom: 1.5%;
 }
 
 .side-bar>div:nth-child(2)>a {
     justify-content: center;
 }
+.side-bar>div>div{
+    font-size: 1.35rem;
+    border-bottom: 0px solid grey;
+}
 
 .side-bar>div>a,
 .side-bar>div>div {
     width: 90%;
-    margin: 2.5% 0 2.5% 0;
+    margin: 1.5% 0 1.5% 0;
     display: flex;
     align-items: center;
-    padding-top: 1.5%;
-    padding-bottom: 1.5%;
+    padding-top: 2.5%;
+    padding-bottom: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .side-bar>div>a>svg,
 .side-bar>div>div>svg {
-    margin-right: 0.5rem;
-    font-size: 1.25rem;
+    margin-right: 0.7rem;
+    font-size: 1.6rem;
 }
 
 .side-bar>div>div>svg {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 
 .side-bar>div>a:hover {
