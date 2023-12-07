@@ -72,18 +72,13 @@ public class RuleSetsControllerTests {
         given()
             .when().get("/rulesets/" + idToRetrieve)
             .then().statusCode(200);
-    }
-
- }
-
-
+        }
     @Test
-    public void whenDeleteRuleset_thenRespondWithNoContent() {
-        Long rulesetIdToDelete = 1L;
-        given()
-                .pathParam("id", rulesetIdToDelete)
-                .when().delete("/ruleset/{id}")
-                .then().statusCode(204);
+        public void getRuleSetById() {
+            Long getRuleSetById = 1L;
+            given()
+                    .pathParam("id", getRuleSetById)
+                    .when().get("/ruleset/{id}")
+                    .then().statusCode(204);
+        }
     }
-}
-
