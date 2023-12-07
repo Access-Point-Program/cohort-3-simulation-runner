@@ -5,7 +5,8 @@
     "react-router-dom": "^6.18.0"
   },
   "devDependencies": {
-    "mocker-api": "^2.9.10"
+    "mocker-api": "^2.9.10",
+    "supertest": "^6.3.3"
   },
   "scripts": {
     "mock:layouts": "mocker ./mocks/layouts.mock.js --host localhost --port 9003",
