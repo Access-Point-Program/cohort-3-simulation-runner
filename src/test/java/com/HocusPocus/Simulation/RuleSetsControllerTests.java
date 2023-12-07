@@ -73,4 +73,4 @@ public class RuleSetsControllerTests {
             .when().get("/rulesets/" + idToRetrieve)
             .then().statusCode(200);
     }
-    }
+ }
