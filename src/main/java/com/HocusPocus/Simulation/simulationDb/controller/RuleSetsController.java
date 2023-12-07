@@ -19,4 +19,14 @@ public class RuleSetsController {
         return ResponseEntity.ok()
                 .body(this.ruleSetsService.getAllRuleSets());
     }
+
+    @GetMapping("/ruleset/{id}")
+    public ResponseEntity<RuleSet> getRuleSetById(@PathVariable Long ruleSetId) {
+        RuleSet ruleSet = ruleSetsService.getRuleSetById(ruleSetId);
+        if (ruleSet != null) {
+            return ResponseEntity.ok(ruleSet);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

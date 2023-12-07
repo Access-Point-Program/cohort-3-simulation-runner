@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RuleSetsService {
@@ -21,4 +23,17 @@ public class RuleSetsService {
                 .bodyToMono(new ParameterizedTypeReference<List<RuleSet>>() {})
                 .block();
     }
+    
+    public RuleSetsService(WebClient webClient) {
+        this.webClient = webClient;
+    }
+
+    private static final Map<Long, RuleSet>
+    mockRulesets = new HashMap<>();
+
+    public RuleSet getRuleSetById(Long ruleSetId) {
+        return mockRulesets.get(ruleSetId);
+    }
 }
+
+
