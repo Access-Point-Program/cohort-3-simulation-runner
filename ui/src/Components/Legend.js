@@ -28,13 +28,13 @@ function Legend() {
       </div>
       <Form>
         <Form.Label className="legend-subtitle moves-subtitle">Moves</Form.Label>
-        <Form.Label className="legend-subtitle move1-subtitle">1 Move Forward</Form.Label>
-        <Form.Label className="legend-subtitle move2-subtitle">2 Turn Right</Form.Label>
-        <Form.Label className="legend-subtitle move3-subtitle">3 Move Forward</Form.Label>
-        <Form.Label className="legend-subtitle move4-subtitle">4 Move Forward</Form.Label>
-        <Form.Label className="legend-subtitle move5-subtitle">5 Right Left</Form.Label>
-        <Form.Label className="legend-subtitle move6-subtitle">6 Move Forward</Form.Label>
-        <Form.Label className="legend-subtitle move7-subtitle">7 Turn Right</Form.Label>
+        <Form.Label className="legend-title move1-subtitle">1 Move Forward</Form.Label>
+        <Form.Label className="legend-title move2-subtitle">2 Turn Right</Form.Label>
+        <Form.Label className="legend-title move3-subtitle">3 Move Forward</Form.Label>
+        <Form.Label className="legend-title move4-subtitle">4 Move Forward</Form.Label>
+        <Form.Label className="legend-title move5-subtitle">5 Right Left</Form.Label>
+        <Form.Label className="legend-title move6-subtitle">6 Move Forward</Form.Label>
+        <Form.Label className="legend-title move7-subtitle">7 Turn Right</Form.Label>
       </Form>
     </Form>
   );

@@ -30,17 +30,6 @@ function SideBar({ currentPage = "simulation" }) {
           Dashboard
         </Button>
         <Button
-          href="Simulation"
-          variant={
-            currentPage === 2 || /simulation/i.test(currentPage)
-              ? "primary"
-              : "dark"
-          }
-        >
-          <BsTools />
-          Simulation
-        </Button>
-        <Button
           href="Reports"
           variant={
             currentPage === 3 || /reports/i.test(currentPage)
@@ -50,6 +39,18 @@ function SideBar({ currentPage = "simulation" }) {
         >
           <BsFillPieChartFill />
           Reports
+        </Button>
+
+        <Button
+          href="Simulation"
+          variant={
+            currentPage === 2 || /simulation/i.test(currentPage)
+              ? "primary"
+              : "dark"
+          }
+        >
+          <BsTools />
+          Simulation
         </Button>
       </div>
 

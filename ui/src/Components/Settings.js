@@ -35,8 +35,8 @@ function Settings() {
   // View
   return (
     <Form className="settings-form">
-      <h3 className="settings-title">Settings</h3>
-
+      <Form.Label className="settings-title">Settings</Form.Label>
+      
       <div className="settings-divider"></div>
 
       <Select

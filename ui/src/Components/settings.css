@@ -1,5 +1,5 @@
 .settings-container {
-    right: 50px;
+    right: 65px;
     margin-bottom: 220px;
 }
 
@@ -8,19 +8,22 @@
     height: 445px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 60px;
+    margin-right: 50px;
     margin-top: -30px;
-    padding: 55px;
-    padding-top: 50px; /*use*/
+    padding: 60px;
+    padding-left: 60px;
+    padding-right: 70px;
+    padding-top: 40px; /*use*/
 }
 
 .settings-title {
     width: 105%;
-    font-size: 1.1em;
+    font-size: 1.18rem;
     color: rgb(117, 117, 117);
+    margin-bottom: -1px;
     padding-bottom: 15px;
-    border-bottom: 1px solid grey;
+    border-bottom: 2px solid rgb(224, 224, 224);
     
 }
 
