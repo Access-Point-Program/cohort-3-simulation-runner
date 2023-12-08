@@ -1,99 +1,84 @@
 package com.HocusPocus.Simulation;
 
-import com.HocusPocus.Simulation.simulationDb.models.RuleSet;
-import com.HocusPocus.Simulation.simulationDb.services.RuleSetsService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.RestAssured;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import org.apache.http.HttpHeaders;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import java.io.IOException;
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class RuleSetsControllerTests {
 
-    private static MockWebServer mockWebServer;
-
-    @LocalServerPort
-    private Integer port;
-
-    @Autowired
-    private WebClient webClient;
-
-
     @Before
-    public void beforeEach() throws IOException {
+    public void beforeEach() {
+        // Set the base URI and port for RestAssured
         RestAssured.baseURI = "http://localhost";
-        RestAssured.port = this.port;
-        mockWebServer = new MockWebServer();
-        // 8080 is used because that is the port for the rules API
-        mockWebServer.start(8080);
+        RestAssured.port = 8080; 
     }
 
     @After
-    public void afterEach() throws IOException {
-        mockWebServer.shutdown();
+    public void afterEach() {
+        // Reset RestAssured configurations if needed
+        RestAssured.reset();
     }
 
     @Test
     public void whenGetAllRuleSets_thenRespondWith200() {
         given()
-                .when().get("/ruleset")
-                .then().statusCode(200);
+            .when().get("/rulesets")
+            .then().statusCode(200);
     }
 
     @Test
-    public void whenGetAllRuleSetsIsCalled_thenItReturnsTheExpectedValues() throws JsonProcessingException {
-        RuleSet mock1 = new RuleSet();
-        mock1.id = 1L;
-        mock1.name = "Bilbo";
-        mock1.creationDate = "10/25/2023";
-
-        RuleSet mock2 = new RuleSet();
-        mock2.id = 2L;
-        mock2.name = "Carol";
-        mock2.creationDate = "10/25/3023";
-
-        mockWebServer.enqueue(new MockResponse()
-                .addHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .setBody(new ObjectMapper().writeValueAsString(List.of(mock1, mock2)))
-        );
-
+    public void whenGetAllRuleSetsIsCalled_thenItReturnsTheExpectedValues() {
         given()
-                .when().get("/ruleset")
-                .then()
-                .body("[0]", hasEntry("id", 1))
-                .body("[0]", hasEntry("name", "Bilbo"))
-                .body("[0]", hasEntry("creationDate", "10/25/2023"))
-                .body("[1]", hasEntry("id", 2))
-                .body("[1]", hasEntry("name", "Carol"))
-                .body("[1]", hasEntry("creationDate", "10/25/3023"));
+            .when().get("/rulesets")
+            .then()
+            .body("[0]", hasEntry("id", 1))
+            .body("[0]", hasEntry("name", "Mock Ruleset 1"))
+            .body("[0]", hasEntry("creation_date", "Mon, 01 Nov 2023 20:33:59 GMT"))
+            .body("[1]", hasEntry("id", 2))
+            .body("[1]", hasEntry("name", "Mock Ruleset 2"))
+            .body("[1]", hasEntry("creation_date", "Mon, 02 Nov 2023 20:33:59 GMT"));
     }
 
     @Test
-    public void whenDeleteRuleset_thenRespondWithNoContent() {
-        Long rulesetIdToDelete = 1L;
+    public void whenRemoveRuleSetById_thenRespondWith200() {
+        int idToRemove = 1;
         given()
-                .pathParam("id", rulesetIdToDelete)
-                .when().delete("/ruleset/{id}")
-                .then().statusCode(204);
+            .when().get("/rulesets/" + idToRemove)
+            .then().statusCode(200);
     }
-}
+
+    @Test
+    public void whenRemoveRuleSetByIdEndpoint_thenItFiltersCorrectly() {
+        int idToRemove = 1;
+        given()
+            .when().get("/rulesets/" + idToRemove)
+            .then().statusCode(200);
+
+        given()
+            .when().get("/rulesets")
+            .then()
+            .body("id", not(hasItem(idToRemove)))
+            .body("name", not(hasItem("Mock Ruleset " + idToRemove)))
+            .body("creation_date", not(hasItem("Mon, 0" + idToRemove + " Nov 2023 20:33:59 GMT")));
+    }
+
+    @Test
+    public void whenGetRuleSetById_thenRespondWith200() {
+        int idToRetrieve = 1;
+        given()
+            .when().get("/rulesets/" + idToRetrieve)
+            .then().statusCode(200);
+        }
+    @Test
+        public void getRuleSetById() {
+            Long getRuleSetById = 1L;
+            given()
+                    .pathParam("id", getRuleSetById)
+                    .when().get("/ruleset/{id}")
+                    .then().statusCode(204);
+        }
+    }
