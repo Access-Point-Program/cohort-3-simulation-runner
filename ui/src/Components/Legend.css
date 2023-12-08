@@ -64,11 +64,11 @@
   margin: 13px;
   margin-top: 40px;
   margin-bottom: 38px;
-  border: 0px solid #000;
+  border: 1px solid rgb(117, 117, 117);
 }
 
 .open-color {
-  background-color: rgb(187, 202, 187);
+  background-color: rgb(255, 255, 255);
 }
 
 .walls-color {
@@ -92,4 +92,102 @@
   left: 9.3%;
   transform: translate(-50%, -50%);
   color: rgb(117, 117, 117);
+}
+
+.move1-subtitle {
+  font-size: 1rem;
+  position: absolute;
+  color: rgb(117, 117, 117);
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 68.9%;
+  left: 14.3%;
+  
+  transform: translate(-50%, -50%);
+  
+}
+
+.move2-subtitle {
+  font-size: 1rem;
+  position: absolute;
+  color: rgb(117, 117, 117);
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 68.9%;
+  left: 14.3%;
+  
+  transform: translate(-50%, -50%);
+  
+}
+
+.move3-subtitle {
+  font-size: 1rem;
+  position: absolute;
+  color: rgb(117, 117, 117);
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 68.9%;
+  left: 14.3%;
+  
+  transform: translate(-50%, -50%);
+  
+}
+
+.move4-subtitle {
+  font-size: 1rem;
+  position: absolute;
+  color: rgb(117, 117, 117);
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 68.9%;
+  left: 14.3%;
+  
+  transform: translate(-50%, -50%);
+  
+}
+
+.move5-subtitle {
+  font-size: 1rem;
+  position: absolute;
+  color: rgb(117, 117, 117);
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 68.9%;
+  left: 14.3%;
+  
+  transform: translate(-50%, -50%);
+  
+}
+
+.move6-subtitle {
+  font-size: 1rem;
+  position: absolute;
+  color: rgb(117, 117, 117);
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 68.9%;
+  left: 14.3%;
+  
+  transform: translate(-50%, -50%);
+  
+}
+
+.move7-subtitle {
+  font-size: 1rem;
+  position: absolute;
+  color: rgb(117, 117, 117);
+  border-bottom: 1px solid grey;
+  padding-bottom: 10px;
+  position: absolute;
+  top: 68.9%;
+  left: 14.3%;
+  
+  transform: translate(-50%, -50%);
+  
 }
