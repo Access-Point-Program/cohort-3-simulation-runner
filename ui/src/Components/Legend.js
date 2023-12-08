@@ -4,7 +4,7 @@ import './Legend.css'; // Import the CSS file
 
 function Legend() {
   return (
-    <Form className="legend-container">
+    <Form className="legend-form">
       <Form.Label className="legend-title">Simulation</Form.Label>
       <Form.Label className="legend-subtitle">Legend</Form.Label>
 
