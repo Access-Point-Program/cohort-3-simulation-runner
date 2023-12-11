@@ -13,6 +13,6 @@
   },
   "scripts": {
     "mock:layouts": "mocker ./mocks/layouts.mock.js --host localhost --port 9003",
-    "mock:rulesets": "mocker ./mocks/rulesets.mock.js --host localhost --port 8080"
+    "mock:rulesets": "mocker ./mocks/rulesets.mock.js --host localhost --port 9004"
   }
 }
