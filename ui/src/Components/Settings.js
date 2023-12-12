@@ -3,6 +3,8 @@ import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Dropdown } from "react-bootstrap";
 import "./settings.css";
+import { Provider } from 'react-redux'
+//const rootElement = document.getElementById('root') root for styling i think
 
 import { useSelector, useDispatch } from 'react-redux'
 import { updateLayout, updateRuleset, updateMaxIterations } from '../store/settingsSlice';
