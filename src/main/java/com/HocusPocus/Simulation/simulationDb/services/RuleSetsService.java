@@ -18,7 +18,7 @@ public class RuleSetsService {
 
     public List<RuleSet> getAllRuleSets() {
         return this.webClient.get()
-                .uri("http://localhost:8080/rulesets/")
+                .uri("http://localhost:9004/rulesets/")
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<RuleSet>>() {})
                 .block();

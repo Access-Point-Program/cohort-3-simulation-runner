@@ -14,7 +14,7 @@ public class RuleSetsControllerTests {
     public void beforeEach() {
         // Set the base URI and port for RestAssured
         RestAssured.baseURI = "http://localhost";
-        RestAssured.port = 8080; 
+        RestAssured.port = 9004; 
     }
 
     @After
