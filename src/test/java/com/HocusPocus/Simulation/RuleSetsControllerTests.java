@@ -33,7 +33,7 @@ public class RuleSetsControllerTests {
     @Test
     public void whenGetAllRuleSetsIsCalled_thenItReturnsTheExpectedValues() {
         given()
-            .when().get("/rulesets")
+            .when().get("/ruleset")
             .then()
             .body("[0]", hasEntry("id", 1))
             .body("[0]", hasEntry("name", "Mock Ruleset 1"))
@@ -47,7 +47,7 @@ public class RuleSetsControllerTests {
     public void whenRemoveRuleSetById_thenRespondWith200() {
         int idToRemove = 1;
         given()
-            .when().get("/rulesets/" + idToRemove)
+            .when().get("/ruleset/" + idToRemove)
             .then().statusCode(200);
     }
 
@@ -55,11 +55,11 @@ public class RuleSetsControllerTests {
     public void whenRemoveRuleSetByIdEndpoint_thenItFiltersCorrectly() {
         int idToRemove = 1;
         given()
-            .when().get("/rulesets/" + idToRemove)
+            .when().get("/ruleset/" + idToRemove)
             .then().statusCode(200);
 
         given()
-            .when().get("/rulesets")
+            .when().get("/ruleset")
             .then()
             .body("id", not(hasItem(idToRemove)))
             .body("name", not(hasItem("Mock Ruleset " + idToRemove)))
@@ -70,7 +70,7 @@ public class RuleSetsControllerTests {
     public void whenGetRuleSetById_thenRespondWith200() {
         int idToRetrieve = 1;
         given()
-            .when().get("/rulesets/" + idToRetrieve)
+            .when().get("/ruleset/" + idToRetrieve)
             .then().statusCode(200);
         }
     @Test

@@ -20,7 +20,7 @@ public class RuleSetsController {
                 .body(this.ruleSetsService.getAllRuleSets());
     }
 
-    @GetMapping("/ruleset/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<RuleSet> getRuleSetById(@PathVariable Long ruleSetId) {
         RuleSet ruleSet = ruleSetsService.getRuleSetById(ruleSetId);
         if (ruleSet != null) {

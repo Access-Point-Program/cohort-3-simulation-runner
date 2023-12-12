@@ -6,10 +6,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class RuleSetsService {
@@ -18,21 +15,18 @@ public class RuleSetsService {
 
     public List<RuleSet> getAllRuleSets() {
         return this.webClient.get()
-                .uri("http://localhost:9004/rulesets/")
+                .uri("http://localhost:9004/ruleset/")
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<RuleSet>>() {})
                 .block();
     }
-    
-    public RuleSetsService(WebClient webClient) {
-        this.webClient = webClient;
-    }
-
-    private static final Map<Long, RuleSet>
-    mockRulesets = new HashMap<>();
-
-    public RuleSet getRuleSetById(Long ruleSetId) {
-        return mockRulesets.get(ruleSetId);
+                            //or (Long ruleSetId)
+    public RuleSet getRuleSetById(Long Id) {
+        return this.webClient.get()                    // or ruleSetId check which one it is 
+                .uri("http://localhost:9004/ruleset/{id}", Id)
+                .retrieve()
+                .bodyToMono(RuleSet.class)
+                .block();
     }
 }
 
