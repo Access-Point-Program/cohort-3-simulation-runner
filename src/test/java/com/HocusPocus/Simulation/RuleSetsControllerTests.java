@@ -26,7 +26,7 @@ public class RuleSetsControllerTests {
     @Test
     public void whenGetAllRuleSets_thenRespondWith200() {
         given()
-            .when().get("/rulesets")
+            .when().get("/ruleset")
             .then().statusCode(200);
     }
 
@@ -75,7 +75,7 @@ public class RuleSetsControllerTests {
         }
     @Test
         public void getRuleSetById() {
-            Long getRuleSetById = 1L;
+            Long getRuleSetById = 1l;
             given()
                     .pathParam("id", getRuleSetById)
                     .when().get("/ruleset/{id}")

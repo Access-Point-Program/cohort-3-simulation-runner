@@ -1,6 +1,8 @@
 package com.HocusPocus.Simulation.simulationDb.services;
 
 import com.HocusPocus.Simulation.simulationDb.models.RuleSet;
+import com.HocusPocus.Simulation.simulationDb.models.RuleSetWithRules;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
@@ -20,14 +22,15 @@ public class RuleSetsService {
                 .bodyToMono(new ParameterizedTypeReference<List<RuleSet>>() {})
                 .block();
     }
-                            //or (Long ruleSetId)
-    public RuleSet getRuleSetById(Long Id) {
-        return this.webClient.get()                    // or ruleSetId check which one it is 
+
+    public RuleSetWithRules getRuleSetById(Long Id) {
+        return this.webClient.get()                   
                 .uri("http://localhost:9004/ruleset/{id}", Id)
                 .retrieve()
-                .bodyToMono(RuleSet.class)
+                .bodyToMono( RuleSetWithRules.class)
                 .block();
     }
 }
+
 
 

@@ -6,7 +6,7 @@ const proxy = {
   },
   
   "GET /ruleset/:id": (req, res) => { 
-  const rulesetId = req.params.id;
+  const rulesetId = Number(req.params.id, 10);
   const foundRuleset = mockRulesets.find(({ id }) => id === rulesetId);
 
   if (foundRuleset) {
@@ -16,6 +16,5 @@ const proxy = {
   }
 }
 
-};
-
+}
 module.exports = proxy;

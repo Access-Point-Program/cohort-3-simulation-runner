@@ -19,16 +19,15 @@ public class LayoutService {
 
     public List<Layout> getAllLayouts() {
         return this.webClient.get()
-                .uri("http://localhost:9003/layouts/")
+                .uri("http://localhost:9003/api/layouts/all")
                 .retrieve()
                 .bodyToMono(new ParameterizedTypeReference<List<Layout>>() {})
                 .block();
     }
 
     public Optional<Layout> getLayoutsById(Long id) {
-      
-        return Optional.ofNullable(this.webClient.get()
-                .uri("http://localhost:9003/layouts/{id}", id)
+      return Optional.ofNullable(this.webClient.get()
+                .uri("http://localhost:9003/api/layouts/{id}", id)
                 .retrieve()
                 .bodyToMono(Layout.class)
                 .block());
@@ -36,6 +35,6 @@ public class LayoutService {
 
 
    // public Optional<Layout> getLayoutsById(Long id) {
-    //    return getLayoutsById(id);
+    //    return getLayoutsById(
    // }
 }

@@ -1,6 +1,7 @@
 package com.HocusPocus.Simulation.simulationDb.controller;
 
 import com.HocusPocus.Simulation.simulationDb.models.RuleSet;
+import com.HocusPocus.Simulation.simulationDb.models.RuleSetWithRules;
 import com.HocusPocus.Simulation.simulationDb.services.RuleSetsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,9 @@ public class RuleSetsController {
                 .body(this.ruleSetsService.getAllRuleSets());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RuleSet> getRuleSetById(@PathVariable Long ruleSetId) {
-        RuleSet ruleSet = ruleSetsService.getRuleSetById(ruleSetId);
+    @GetMapping("/{id}")//changed  ResponseEntity<RuleSet> to  ResponseEntity<RuleSetWithRules> 
+    public ResponseEntity<RuleSetWithRules> getRuleSetById(@PathVariable Long id) {
+        RuleSetWithRules ruleSet = ruleSetsService.getRuleSetById(id);
         if (ruleSet != null) {
             return ResponseEntity.ok(ruleSet);
         } else {
