@@ -10,6 +10,6 @@ public class RuleSetWithRules {
     
     @JsonProperty("creation_date")
     public String creationDate;
-    public List<Rules> rule;
+    public List<Rules> rules;
 
 }
