@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Dropdown } from "react-bootstrap";
 import "./settings.css";
 import { Provider } from 'react-redux'
+import Button from 'react-bootstrap/Button'
 //const rootElement = document.getElementById('root') root for styling i think
 
 import { useSelector, useDispatch } from 'react-redux'
@@ -34,8 +35,8 @@ function Settings() {
   // View
   return (
     <Form className="settings-form">
-      <h3 className="settings-title">Settings</h3>
-
+      <Form.Label className="settings-title">Settings</Form.Label>
+      
       <div className="settings-divider"></div>
 
       <Select
