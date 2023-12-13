@@ -1,10 +1,10 @@
 package com.HocusPocus.Simulation.simulationDb.models;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-public class Layout {
+import java.util.List;
+public class LayoutId {
     
+
     @JsonProperty("layout_id")
     
     public Long id;
@@ -12,6 +12,4 @@ public class Layout {
 
     @JsonProperty("creation_date")
     public String creationDate;
-
-
 }
