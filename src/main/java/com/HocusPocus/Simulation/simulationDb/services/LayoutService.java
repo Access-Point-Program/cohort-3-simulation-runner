@@ -3,7 +3,6 @@ package com.HocusPocus.Simulation.simulationDb.services;
 import com.HocusPocus.Simulation.simulationDb.SimulationResults;
 import com.HocusPocus.Simulation.simulationDb.controller.LayoutController;
 import com.HocusPocus.Simulation.simulationDb.models.Layout;
-import com.HocusPocus.Simulation.simulationDb.models.LayoutId;
 import com.HocusPocus.Simulation.simulationDb.models.RuleSetWithRules;
 
 import org.springframework.beans.factory.annotation.Autowired;
