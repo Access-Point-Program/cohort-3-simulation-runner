@@ -2,17 +2,26 @@ package com.HocusPocus.Simulation.simulationDb;
 
 import com.HocusPocus.Simulation.simulationDb.models.Layout;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.sql.Timestamp;
+import java.util.TimeZone;
 
 @Entity
-@Table(name = "results")
+@Table(name = "simulation_results")
 public class SimulationResults {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="simulation_results_id")
     private Long id;
-    private  String name;
-
+    private String name;
+    @Column(name="max_iterations")
     private int maxIterations;
+    @Column(name="actual_iterations")
     private int actualIterations;
+
+    @Column(name="created_date")
+    private Timestamp creationDate;
     private boolean pass;
 
     // Constructors, Getters, and Setters
@@ -55,4 +64,6 @@ public class SimulationResults {
     public void setPass(boolean pass) {
         this.pass = pass;
     }
+
+
 }

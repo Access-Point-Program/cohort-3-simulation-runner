@@ -50,6 +50,5 @@ public class SimulationService {
     public void deleteSimulationResults(Long id) {
         simulationRepo.deleteById(id);
     }
-
 }
 
