@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping(path="/layout")
+@RestController //changed layout to layouts 
+@RequestMapping(path="/layouts")
 public class LayoutController {
     @Autowired
     LayoutService layoutService;
