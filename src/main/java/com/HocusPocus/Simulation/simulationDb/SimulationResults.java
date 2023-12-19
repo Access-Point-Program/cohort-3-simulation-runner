@@ -1,69 +1,45 @@
 package com.HocusPocus.Simulation.simulationDb;
 
-import com.HocusPocus.Simulation.simulationDb.models.Layout;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-
 import java.sql.Timestamp;
-import java.util.TimeZone;
 
+@Data
 @Entity
 @Table(name = "simulation_results")
 public class SimulationResults {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="simulation_results_id")
+    @Column(name = "simulation_results_id")
     private Long id;
-    private String name;
-    @Column(name="max_iterations")
+
+    @NotNull
+    @Column(name = "ruleset_id")
+    private Long rulesetId;
+
+    @NotNull
+    @Column(name = "layout_id")
+    private Long layoutId;
+
+    @NotNull
+    @Min(1)
+    @Column(name = "max_iterations")
     private int maxIterations;
-    @Column(name="actual_iterations")
+
+    @NotNull
+    @Min(1)
+    @Column(name = "actual_iterations")
     private int actualIterations;
 
-    @Column(name="created_date")
+
+    @CreationTimestamp
+    @Column(name = "created_date")
     private Timestamp creationDate;
+
+    @NotNull
     private boolean pass;
-
-    // Constructors, Getters, and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getMaxIterations() {
-        return maxIterations;
-    }
-
-    public void setMaxIterations(int maxIterations) {
-        this.maxIterations = maxIterations;
-    }
-
-    public int getActualIterations() {
-        return actualIterations;
-    }
-
-    public void setActualIterations(int actualIterations) {
-        this.actualIterations = actualIterations;
-    }
-
-    public boolean getPass() {
-        return pass;
-    }
-
-    public void setPass(boolean pass) {
-        this.pass = pass;
-    }
-
 
 }
