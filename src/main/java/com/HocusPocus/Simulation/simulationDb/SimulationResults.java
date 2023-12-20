@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Timestamp;
-
+//Hi
 @Data
 @Entity
 @Table(name = "simulation_results")
