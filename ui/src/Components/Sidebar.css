@@ -1,48 +1,59 @@
 .side-bar {
-    border-radius: 0;
+    border-radius: 0px !important;
     min-height: 100vh;
-    display: flex;
+    display: fixed;
     flex-direction: column;
     justify-content: space-between;
     position: fixed;
 }
-/** min height change, change position */
-.side-bar>div {
+
+.side-bar > div {
+    border-radius: 0px;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.side-bar>div:nth-child(2)>a {
-    justify-content: center;
-}
-
-.side-bar>div>a,
-.side-bar>div>div {
-    width: 90%;
-    margin: 2.5% 0 2.5% 0;
-    display: flex;
-    align-items: center;
-    padding-top: 1.5%;
+    width: 17rem;
+    padding-top: 4.5%;
     padding-bottom: 1.5%;
 }
 
-.side-bar>div>a>svg,
-.side-bar>div>div>svg {
-    margin-right: 0.5rem;
-    font-size: 1.25rem;
+.side-bar > div:nth-child(2) > a {
+    justify-content: center;
 }
 
-.side-bar>div>div>svg {
-    font-size: 1.5rem;
+.side-bar > div > div {
+    font-size: 1.35rem;
 }
 
-.side-bar>div>a:hover {
+.side-bar > div > a,
+.side-bar > div > div {
+    width: 90%;
+    margin: 1.5% 0 1.5% 0;
+    display: flex;
+    align-items: center;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 0.5rem;
+}
+
+.side-bar > div > a > svg,
+.side-bar > div > div > svg {
+    margin-right: 0.7rem;
+    font-size: 1.6rem;
+}
+
+.side-bar > div > div > svg {
+    font-size: 2.5rem;
+}
+
+.side-bar > div > a:hover {
     background-color: #6f44e4;
     border-color: #6f44e4;
 }
 
-.side-bar>div>a:active {
+.side-bar > div > a:active {
     background-color: #613dc5 !important;
     border-color: #613dc5 !important;
 }

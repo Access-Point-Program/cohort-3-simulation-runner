@@ -1,61 +1,42 @@
 import React from "react";
+import { Form } from 'react-bootstrap';
+import './Legend.css'; // Import the CSS file
 
 function Legend() {
-  const legendStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  };
-
-  const legendItemStyle = {
-    display: "flex",
-    alignItems: "center",
-    margin: "5px",
-  };
-
-  const colorBlockStyle = {
-    width: "20px",
-    height: "20px",
-    marginRight: "5px",
-    border: "1px solid #000",
-  };
-
   return (
-    <div style={legendStyle}>
-      <div style={legendItemStyle}>
-        <div style={{ ...colorBlockStyle, backgroundColor: "white" }}></div>
-        <span> Outside Wall </span>
+    <Form className="legend-form">
+      <Form.Label className="legend-title">Simulation</Form.Label>
+      <Form.Label className="legend-subtitle">Legend</Form.Label>
+
+      <div className="legend-items">
+        <div className="legend-item">
+          <div className="legend-color-block open-color"></div>
+          <Form.Text className="legend-text">Open</Form.Text>
+        </div>
+        <div className="legend-item">
+          <div className="legend-color-block walls-color"></div>
+          <Form.Text className="legend-text">Walls</Form.Text>
+        </div>
+        <div className="legend-item">
+          <div className="legend-color-block robot-color"></div>
+          <Form.Text className="legend-text">Robot</Form.Text>
+        </div>
+        <div className="legend-item">
+          <div className="legend-color-block end-color"></div>
+          <Form.Text className="legend-text">End</Form.Text>
+        </div>
       </div>
-      <div style={legendItemStyle}>
-        <div style={{ ...colorBlockStyle, backgroundColor: "black" }}></div>
-        <span> Robot </span>
-      </div>
-      <div style={legendItemStyle}>
-        <div style={{ ...colorBlockStyle, backgroundColor: "green" }}></div>
-        <span> Robot Starting Position </span>
-      </div>
-      <div style={legendItemStyle}>
-        <div
-          style={{ ...colorBlockStyle, backgroundColor: "rgb(255, 157, 158)" }}
-        ></div>
-        <span> End </span>
-      </div>
-      <div style={legendItemStyle}>
-        <div
-          style={{ ...colorBlockStyle, backgroundColor: "rgb(187, 202, 187)" }}
-        ></div>
-        <span> Path </span>
-      </div>
-      <div style={legendItemStyle}>
-        <div
-          style={{
-            ...colorBlockStyle,
-            backgroundColor: "rgba(110, 110, 113, 0.371)",
-          }}
-        ></div>
-        <span> Walls </span>
-      </div>
-    </div>
+      <Form>
+        <Form.Label className="legend-subtitle moves-subtitle">Moves</Form.Label>
+        <Form.Label className="legend-title move1-subtitle">1 Move Forward</Form.Label>
+        <Form.Label className="legend-title move2-subtitle">2 Turn Right</Form.Label>
+        <Form.Label className="legend-title move3-subtitle">3 Move Forward</Form.Label>
+        <Form.Label className="legend-title move4-subtitle">4 Move Forward</Form.Label>
+        <Form.Label className="legend-title move5-subtitle">5 Right Left</Form.Label>
+        <Form.Label className="legend-title move6-subtitle">6 Move Forward</Form.Label>
+        <Form.Label className="legend-title move7-subtitle">7 Turn Right</Form.Label>
+      </Form>
+    </Form>
   );
 }
 

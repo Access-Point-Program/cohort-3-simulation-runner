@@ -1,72 +1,78 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form } from "react-bootstrap";
+import { Form, Dropdown } from "react-bootstrap";
+import "./settings.css";
+import { Provider } from 'react-redux'
+import Button from 'react-bootstrap/Button'
+//const rootElement = document.getElementById('root') root for styling i think
 
-function Settings({ layout, onSelect, ruleset }) {
-  const [selectedLayout, setSelectedLayout] = useState(null);
-  const [layoutOptions, setLayoutOptions] = useState([]);
-  const [selectedRuleset, setSelectedRuleset] = useState(null);
-  const [rulesetOptions, setRulesetOptions] = useState([]);
+import { useSelector, useDispatch } from 'react-redux'
+import { updateLayout, updateRuleset, updateMaxIterations } from '../store/settingsSlice';
+import { useGetRuleSetsQuery } from '../store/ruleSetsSlice';
+import { useGetLayOutsQuery } from '../store/layOutsSlice';
 
-  useEffect(() => {
-    // Map layout options
-    const options = Object.keys(layout).map((key) => ({
-      value: key,
-      label: layout[key].name,
-    }));
-    setLayoutOptions(options);
+function Settings() {
+  // Hooks
+  const dispatch = useDispatch()
+  const layoutId = useSelector((state) => state.settings.layoutId);
+  const rulesetId = useSelector((state) => state.settings.rulesetId);
+  const maxIterations = useSelector((state) => state.settings.maxIterations);
+  // Question: should we handle a possible error here?
+  const { data: rulesets = [], error, isLoading } = useGetRuleSetsQuery();
 
-    // If there are options and selectedLayout is not set, set the first option as default
-    if (options.length > 0 && !selectedLayout) {
-      setSelectedLayout(options[0]);
-      onSelect(layout[options[0].value]);
-    }
-  }, [layout, onSelect, selectedLayout]);
+  // Event Handlers 
+  const onSelectLayout = (selectedOption) => dispatch(updateLayout(selectedOption.value));
+  const onSelectRuleset = (selectedOption) => dispatch(updateRuleset(selectedOption.value));
+  const onChangeMaxIterations = (e) => dispatch(updateMaxIterations(e.target.value));
 
-  useEffect(() => {
-    // Map ruleset options
-    const options2 = Object.keys(ruleset).map((key) => ({
-      value: key,
-      label: ruleset[key].name,
-    }));
-    setRulesetOptions(options2);
-  }, [ruleset]);
+  // Data Transformations
+  const rulesetOptions = rulesets.map((ruleset) => ({ value: ruleset.id, label: ruleset.name }));
+  const layoutOptions = [];
+  const selectedLayoutOption = layoutOptions.find(({ value }) => value === layoutId);
+  const selectedRulesetOption = rulesetOptions.find(({ value }) => value === rulesetId)
 
-  const handleLayoutSelection = (selectedOption) => {
-    setSelectedLayout(selectedOption);
-    onSelect(layout[selectedOption.value]);
-  };
-
+  // View
   return (
-    <div>
-      <h2>Settings</h2>
+    <Form className="settings-form">
+      <Form.Label className="settings-title">Settings</Form.Label>
+      
+      <div className="settings-divider"></div>
+
       <Select
-        value={selectedLayout}
-        onChange={handleLayoutSelection}
+        className="settings-select"
+        value={selectedLayoutOption}
+        onChange={onSelectLayout}
         options={layoutOptions}
+        placeholder="Layout"
       />
-
-      {/* Assuming you want to display ruleset options as well */}
+      <div className="settings-divider"></div>
       <Select
-        value={selectedRuleset}
-        onChange={(selectedOption) => setSelectedRuleset(selectedOption)}
+        className="settings-select"
+        value={selectedRulesetOption}
+        onChange={onSelectRuleset}
         options={rulesetOptions}
+        // Question why are we disabling this select when it's loading or an error?
+        isDisabled={isLoading || error}
+        isLoading={isLoading}
+        placeholder="Ruleset"
       />
-
-      <Form.Group controlId="maxIt">
+      <div className="settings-divider"></div>
+      <Form.Group controlId="maxIt" className="settings-maxIt">
         <Form.Control
           required
           name="maxIt"
           type="number"
-          placeholder="Max Iteration"
+          onChange={onChangeMaxIterations}
+          value={maxIterations}
         />
         <Form.Control.Feedback type="invalid">Check!</Form.Control.Feedback>
       </Form.Group>
-      <div className="runButton">
-        <button type="button">Run Simulation</button>
+      <div className="settings-runButton">
+        {/* STOP AND ASK BEFORE YOU IMPLEMENT THIS!! Story #46 */}
+        <button type="button" className="settings-button">Run Simulation</button>
       </div>
-    </div>
+    </Form >
   );
 }
 

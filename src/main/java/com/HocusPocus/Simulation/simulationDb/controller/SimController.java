@@ -1,7 +1,7 @@
-package com.HocusPocus.Simulation.controller;
+package com.HocusPocus.Simulation.simulationDb.controller;
 
 import com.HocusPocus.Simulation.simulationDb.SimulationResults;
-import com.HocusPocus.Simulation.SimulationService;
+import com.HocusPocus.Simulation.simulationDb.services.SimulationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,30 +1,19 @@
 const mockRulesets = require("./data/rulesets.json");
 
 const proxy = {
-  _proxy: {
-    changeHost: true,
-    httpProxy: {
-      options: {
-        ignorePath: true,
-      },
-    },
-  },
-
-  "GET /": (_, res) => {
-    console.log("Root route hit");
-  },
-
-  "GET /rulesets": (_, res) => {
-    console.log("GET /rulesets.json route hit");
-    console.log("mockRulesets:", mockRulesets);
+  "GET /ruleset": (_, res) => {
     res.json(mockRulesets);
   },
+  
+  "GET /ruleset/:id": (req, res) => { 
+  const rulesetId = Number(req.params.id, 10);
+  const foundRuleset = mockRulesets.find(({ id }) => id === rulesetId);
 
-  "DELETE /rulesets/:id": (req, res) => {
-    console.log("DELETE /rulesets/:id route hit");
-    mockRulesets = mockRulesets.filter(({ id }) => id != req.params.id);
-    res.send();
-  },
-};
-
+  if (foundRuleset) {
+      res.json(foundRuleset);
+  } else {
+      res.status(404).json({ error: "Ruleset not found" });
+  }
+}
+}
 module.exports = proxy;

@@ -1,57 +1,33 @@
 package com.HocusPocus.Simulation.simulationDb;
 
+import com.HocusPocus.Simulation.simulationDb.models.Layout;
 import jakarta.persistence.*;
+import lombok.Data;
 
+import java.sql.Timestamp;
+
+@Data
 @Entity
-@Table(name = "results")
+@Table(name = "simulation_results", schema = "public")
 public class SimulationResults {
     @Id
+    @Column(name = "simulation_results_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Transient
     private  String name;
 
+    @Column(name = "rule_id")
+    private Long ruleId;
+
+    @Column(name = "layout_id")
+    private Long layoutId;
+    @Column(name = "max_iterations")
     private int maxIterations;
+    @Column(name = "actual_iterations")
     private int actualIterations;
+
+    @Column(name = "created_date")
+    private Timestamp createdDate;
     private boolean pass;
-
-    // Constructors, Getters, and Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getMaxIterations() {
-        return maxIterations;
-    }
-
-    public void setMaxIterations(int maxIterations) {
-        this.maxIterations = maxIterations;
-    }
-
-    public int getActualIterations() {
-        return actualIterations;
-    }
-
-    public void setActualIterations(int actualIterations) {
-        this.actualIterations = actualIterations;
-    }
-
-    public boolean getPass() {
-        return pass;
-    }
-
-    public void setPass(boolean pass) {
-        this.pass = pass;
-    }
 }
