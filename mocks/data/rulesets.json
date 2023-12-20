@@ -386,7 +386,7 @@
   {
     "id": 9,
     "name": "Mock Ruleset 9",
-<<<<<<< HEAD
+
     "creation_date": "Mon, 09 Nov 2023 20:33:59 GMT"
   },
   {
@@ -411,7 +411,7 @@
         {"fact_type": "RIGHT", "value_type": "WALL"},
         {"fact_type": "BEHIND", "value_type": "WALL"}
       ]}
-=======
+
     "creation_date": "Mon, 09 Nov 2023 20:33:59 GMT",
     "rules": [
       {
@@ -455,7 +455,7 @@
           }
         ]
       }
->>>>>>> origin/69
+
     ]
   }
 ]
