@@ -9,3 +9,7 @@
     flex: 1;
 
 }
+.settings-container {
+     position: absolute;
+     top: 100px;
+ }
