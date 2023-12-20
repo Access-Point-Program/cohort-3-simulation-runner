@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "./Components/Sidebar";
-import Grid from "../Components/grid";
-import Legend from "../Components/Legend";
+import Grid from "./Components/grid";
+import Legend from "./Components/Legend";
 import Settings from "./Components/Settings"
 import "./App.css"; // Import your CSS file for styling
 
