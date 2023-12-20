@@ -410,10 +410,10 @@
         {"fact_type": "LEFT", "value_type": "EMPTY"},
         {"fact_type": "RIGHT", "value_type": "WALL"},
         {"fact_type": "BEHIND", "value_type": "WALL"}
-      ]}
+      ]},
 
-    "creation_date": "Mon, 09 Nov 2023 20:33:59 GMT",
-    "rules": [
+    "creation_date"], "Mon, 09 Nov 2023 20:33:59 GMT":
+    "rules"} ,
       {
         "id": 32,
         "priority": 3.0,
@@ -455,8 +455,5 @@
           }
         ]
       }
+    ]
 
-    ]
-  
-    ]
-]
