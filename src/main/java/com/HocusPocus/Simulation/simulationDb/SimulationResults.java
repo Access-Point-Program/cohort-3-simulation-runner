@@ -26,7 +26,6 @@ public class SimulationResults {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "simulation_results_id")
     private Long id;
-Update-the-SQL-generation-in-the-application.properties
 
     @NotNull
     @Column(name = "ruleset_id")
