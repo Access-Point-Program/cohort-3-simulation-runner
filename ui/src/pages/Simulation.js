@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Grid from "../Components/grid";
 import Legend from "../Components/Legend";
-import Settings from "../Components/Settings";
+import Settings from "../Components/settings";
 // Fix settings
 import "./Simulation.css";
 
