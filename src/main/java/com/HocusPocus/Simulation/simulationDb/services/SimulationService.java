@@ -34,7 +34,6 @@ public class SimulationService {
         Optional<SimulationResults> simulationResults = simulationRepo.findById(id);
         if (simulationResults.isPresent()) {
             SimulationResults existingSimulationResults = simulationResults.get();
-            existingSimulationResults.setName(simulationResultsDetails.getName());
             existingSimulationResults.setActualIterations(simulationResultsDetails.getActualIterations());
             return simulationRepo.save(existingSimulationResults);
         }
@@ -50,6 +49,5 @@ public class SimulationService {
     public void deleteSimulationResults(Long id) {
         simulationRepo.deleteById(id);
     }
-
 }
 

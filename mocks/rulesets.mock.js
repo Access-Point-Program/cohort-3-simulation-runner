@@ -14,6 +14,7 @@ const proxy = {
   } else {
       res.status(404).json({ error: "Ruleset not found" });
   }
+
 }
 }
 module.exports = proxy;

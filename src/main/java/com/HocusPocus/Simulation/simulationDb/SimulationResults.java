@@ -1,33 +1,45 @@
 package com.HocusPocus.Simulation.simulationDb;
 
-import com.HocusPocus.Simulation.simulationDb.models.Layout;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-
+import org.hibernate.annotations.CreationTimestamp;
 import java.sql.Timestamp;
 
 @Data
 @Entity
-@Table(name = "simulation_results", schema = "public")
+@Table(name = "simulation_results")
 public class SimulationResults {
     @Id
-    @Column(name = "simulation_results_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "simulation_results_id")
     private Long id;
-    @Transient
-    private  String name;
 
-    @Column(name = "rule_id")
-    private Long ruleId;
+    @NotNull
+    @Column(name = "ruleset_id")
+    private Long rulesetId;
 
+    @NotNull
     @Column(name = "layout_id")
     private Long layoutId;
+
+    @NotNull
+    @Min(1)
     @Column(name = "max_iterations")
     private int maxIterations;
+
+    @NotNull
+    @Min(1)
     @Column(name = "actual_iterations")
     private int actualIterations;
 
+
+    @CreationTimestamp
     @Column(name = "created_date")
-    private Timestamp createdDate;
+    private Timestamp creationDate;
+
+    @NotNull
     private boolean pass;
+
 }

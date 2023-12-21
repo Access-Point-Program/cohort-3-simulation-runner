@@ -2,7 +2,10 @@ package com.HocusPocus.Simulation.simulationDb.controller;
 
 import com.HocusPocus.Simulation.simulationDb.SimulationResults;
 import com.HocusPocus.Simulation.simulationDb.services.SimulationService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +19,7 @@ public class SimController {
 
     // Create a new simulation
     @PostMapping
-    public SimulationResults createSimulationResults(@RequestBody SimulationResults simulationResults) {
+    public SimulationResults createSimulationResults(@Valid @RequestBody SimulationResults simulationResults) {
         return simulationService.createSimulationResults(simulationResults);
     }
 
