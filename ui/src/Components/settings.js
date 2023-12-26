@@ -22,12 +22,14 @@ function Settings() {
   const onSelectLayout = (selectedOption) => dispatch(updateLayout(selectedOption.value));
   const onSelectRuleset = (selectedOption) => dispatch(updateRuleset(selectedOption.value));
   const onChangeMaxIterations = (e) => dispatch(updateMaxIterations(e.target.value));
+  const runSimulation = (e) => window.alert("SCREAMS!!!");
 
   // Data Transformations
   const rulesetOptions = rulesets.map((ruleset) => ({ value: ruleset.id, label: ruleset.name }));
   const layoutOptions = layouts.map((layout) => ({ value: layout.layout_id, label: layout.name }));;
   const selectedLayoutOption = layoutOptions.find(({ value }) => value === layoutId);
-  const selectedRulesetOption = rulesetOptions.find(({ value }) => value === rulesetId)
+  const selectedRulesetOption = rulesetOptions.find(({ value }) => value === rulesetId);
+  const canRunSimulation = layoutId !== null && rulesetId !== null;
 
   // View
   return (
@@ -67,8 +69,9 @@ function Settings() {
         <Form.Control.Feedback type="invalid">Check!</Form.Control.Feedback>
       </Form.Group>
       <div className="settings-runButton">
-        {/* STOP AND ASK BEFORE YOU IMPLEMENT THIS!! Story #46 */}
-        <button type="button" className="settings-button">Run Simulation</button>
+        <button
+          type="button" className="btn btn-primary" disabled={!canRunSimulation}
+          onClick={runSimulation}>Run Simulation</button>
       </div>
     </Form >
   );
