@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+// TODO - make this no longer call the mocks
+
 export const rulesetsApi = createApi({
   reducerPath: 'rulesetsApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: `/`,
-  }),
+  //baseQuery: fetchBaseQuery({ baseUrl: `/` }),
+  baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:9004/` }),
 
   // Tags are important for caching to prevent additional API calls.
   tagTypes: ['RuleSet'],
