@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import settingsReducer from './store/settingsSlice';
+import simulationReducer from './store/simulationSlice';
 import {rulesetsApi} from './store/ruleSetsSlice';
 import {layoutsApi} from './store/layOutsSlice';
 
@@ -7,6 +8,7 @@ export const store = configureStore({
   reducer: {
     // Redux Slice
     settings: settingsReducer,
+    simulation: simulationReducer,
     // API Slice
     [rulesetsApi.reducerPath]: rulesetsApi.reducer,
     [layoutsApi.reducerPath]: layoutsApi.reducer,

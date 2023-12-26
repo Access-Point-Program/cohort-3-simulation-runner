@@ -1,27 +1,38 @@
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-
-import { createSlice } from "@reduxjs/toolkit";
+export const runSimulation = createAsyncThunk(
+  'simulation/runSimulation',
+  async ({ rulesetId, layoutId }) => {
+    // Call Ruleset By ID api endpoint
+    // Call Layout By ID api endpoint
+    // Run the simulation -> call something the runs the simulation
+    return null;
+  }
+)
 
 export const simulationSlice = createSlice({
   name: "simulation",
   initialState: {
-    isRunning: false,
+    loading: false,
+    error: null,
     results: null,
   },
-  reducers: {
-    startSimulation: (state) => {
-      state.isRunning = true;
-      state.results = null; 
-    },
-    stopSimulation: (state) => {
-      state.isRunning = false;
-    },
-    setSimulationResults: (state, action) => {
+  extraReducers: (builder) => {
+    builder.addCase(runSimulation.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+      state.results = null;
+    });
+
+    builder.addCase(runSimulation.fulfilled, (state, action) => {
+      state.loading = false;
       state.results = action.payload;
-    },
+    });
+
+    builder.addCase(runSimulation.rejected, (state, action) => {
+      state.error = 'Ope!';
+    });
   },
 });
 
-export const { startSimulation, stopSimulation, setSimulationResults } =
-  simulationSlice.actions;
 export default simulationSlice.reducer;

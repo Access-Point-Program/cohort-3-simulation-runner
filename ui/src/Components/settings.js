@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateLayout, updateRuleset, updateMaxIterations } from '../store/settingsSlice';
 import { useGetRuleSetsQuery } from '../store/ruleSetsSlice';
 import { useGetLayoutsQuery } from '../store/layOutsSlice';
+import { runSimulation } from '../store/simulationSlice';
 
 function Settings() {
   // Hooks
@@ -22,7 +23,14 @@ function Settings() {
   const onSelectLayout = (selectedOption) => dispatch(updateLayout(selectedOption.value));
   const onSelectRuleset = (selectedOption) => dispatch(updateRuleset(selectedOption.value));
   const onChangeMaxIterations = (e) => dispatch(updateMaxIterations(e.target.value));
-  const runSimulation = (e) => window.alert("SCREAMS!!!");
+  const onRunSimulationClick = () => {
+    dispatch(runSimulation({ rulesetId, layoutId }))
+      // https://redux-toolkit.js.org/api/createAsyncThunk#unwrapping-result-actions
+      .unwrap()
+      .then((resultsToSave) => {
+        // Save Results to the simulation API
+      });
+  };
 
   // Data Transformations
   const rulesetOptions = rulesets.map((ruleset) => ({ value: ruleset.id, label: ruleset.name }));
@@ -35,7 +43,7 @@ function Settings() {
   return (
     <Form className="settings-form">
       <Form.Label className="settings-title">Settings</Form.Label>
-      
+
       <div className="settings-divider"></div>
 
       <Select
@@ -70,8 +78,12 @@ function Settings() {
       </Form.Group>
       <div className="settings-runButton">
         <button
-          type="button" className="btn btn-primary" disabled={!canRunSimulation}
-          onClick={runSimulation}>Run Simulation</button>
+          type="button"
+          className="btn btn-primary"
+          disabled={!canRunSimulation}
+          onClick={onRunSimulationClick}>
+            Run Simulation
+        </button>
       </div>
     </Form >
   );
