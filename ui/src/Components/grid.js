@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector } from 'react-redux'
 import "./Grid.css";
 
-function Grid({ data }) {
-  const [maze, setMaze] = useState([
+function Grid() {
+  const grid = useSelector((state) => state.simulation.grid);
+  const maze = grid ?? [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -12,17 +14,12 @@ function Grid({ data }) {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
-  ]);
-
-  useEffect(() => {
-    if (data && data.matrix) {
-      setMaze(data.matrix);
-    }
-  }, [data]);
+  ];
 
   const gridJSX = maze.map((row, rowIndex) => (
     <div key={rowIndex} className="maze-row">
       {row.map((cell, columnIndex) => (
+        /* TODO if row and column appear in moves list then change class to cell-4  */
         <div
           key={columnIndex}
           className={`cell cell-${cell}`}

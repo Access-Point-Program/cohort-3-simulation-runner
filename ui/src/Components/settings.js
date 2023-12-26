@@ -24,7 +24,7 @@ function Settings() {
   const onSelectRuleset = (selectedOption) => dispatch(updateRuleset(selectedOption.value));
   const onChangeMaxIterations = (e) => dispatch(updateMaxIterations(e.target.value));
   const onRunSimulationClick = () => {
-    dispatch(runSimulation({ rulesetId, layoutId }))
+    dispatch(runSimulation({ rulesetId, layoutId, maxIterations }))
       // https://redux-toolkit.js.org/api/createAsyncThunk#unwrapping-result-actions
       .unwrap()
       .then((resultsToSave) => {

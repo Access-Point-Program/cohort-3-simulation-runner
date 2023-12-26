@@ -2,34 +2,23 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import {rulesetsApi} from './ruleSetsSlice';
 import {layoutsApi} from './layOutsSlice';
+import RulesEngine from "../services/RulesEngine";
 
 export const runSimulation = createAsyncThunk(
   'simulation/runSimulation',
-  async ({ rulesetId, layoutId }, thunkAPI) => {
+  async ({ rulesetId, layoutId, maxIterations}, thunkAPI) => {
     const { dispatch } = thunkAPI;
-    const { data: ruleset, isSuccess: rulesetIsSuccess} = await dispatch(rulesetsApi.endpoints.getRuleSetById.initiate(rulesetId));
-    if (!rulesetIsSuccess) {
-      throw 'SCREAMS rulesets';
-    }
+    const { data: ruleset} = await dispatch(rulesetsApi.endpoints.getRuleSetById.initiate(rulesetId));
+    const { data: layout} = await dispatch(layoutsApi.endpoints.getLayoutByID.initiate(layoutId));
+    const rulesEngine = new RulesEngine(ruleset, layout, maxIterations);
 
-    const { data: layout, isSuccess: layoutIsSuccess} = await dispatch(layoutsApi.endpoints.getLayoutByID.initiate(layoutId));
-    if (!layoutIsSuccess) {
-      throw 'SCREAMS layouts';
-    }
-
-    /*
-      TODOs
-      1. Update the layouts mock to have the correct data for get layout by ID
-        - https://github.com/Access-Point-Program/cohort-3-factory-layout-admin
-      2. Update the Java Code to return that real data 
-      3. Build rules engine 
-      4. Run rules engine
-      5. return the results
-     */
+    rulesEngine.buildEngine();
+    await rulesEngine.runSimulation();
 
     return {
-      ruleset,
-      layout
+      grid: layout.cells,
+      succeeded: rulesEngine.succeeded(),
+      moves: rulesEngine.moves(),
     };
   }
 )
@@ -39,18 +28,25 @@ export const simulationSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
-    results: null,
+    grid: null,
+    moves: [],
+    succeeded: null,
   },
   extraReducers: (builder) => {
     builder.addCase(runSimulation.pending, (state) => {
       state.loading = true;
       state.error = null;
-      state.results = null;
+      state.grid = null;
+      state.moves = [];
+      state.succeeded = null;
     });
 
     builder.addCase(runSimulation.fulfilled, (state, action) => {
       state.loading = false;
       state.results = action.payload;
+      state.grid = action.payload.grid;
+      state.moves = action.payload.moves;
+      state.succeeded = action.payload.succeeded;
     });
 
     builder.addCase(runSimulation.rejected, (state, action) => {

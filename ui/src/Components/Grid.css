@@ -42,17 +42,13 @@
 }
 
 .cell-2 {
-    background-color: black;
+    background-color: green;
 }
 
 .cell-3 {
-    background-color: rgb(187, 202, 187);
-}
-
-.cell-4 {
     background-color: rgb(255, 157, 158);
 }
 
-.cell-5 {
+.cell-4 {
     background-color: green;
 }
