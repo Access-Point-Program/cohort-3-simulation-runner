@@ -1,16 +1,13 @@
 import React from "react";
 import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Dropdown } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import "./settings.css";
-import { Provider } from 'react-redux'
-import Button from 'react-bootstrap/Button'
-//const rootElement = document.getElementById('root') root for styling i think
 
 import { useSelector, useDispatch } from 'react-redux'
 import { updateLayout, updateRuleset, updateMaxIterations } from '../store/settingsSlice';
 import { useGetRuleSetsQuery } from '../store/ruleSetsSlice';
-import { useGetLayOutsQuery } from '../store/layOutsSlice';
+import { useGetLayoutsQuery } from '../store/layOutsSlice';
 
 function Settings() {
   // Hooks
@@ -18,8 +15,8 @@ function Settings() {
   const layoutId = useSelector((state) => state.settings.layoutId);
   const rulesetId = useSelector((state) => state.settings.rulesetId);
   const maxIterations = useSelector((state) => state.settings.maxIterations);
-  // Question: should we handle a possible error here?
-  const { data: rulesets = [], error, isLoading } = useGetRuleSetsQuery();
+  const { data: rulesets = [], error: rulesetsError, isLoading: rulesetsLoading } = useGetRuleSetsQuery();
+  const { data: layouts = [], error: layoutsError, isLoading: layoutsLoading } = useGetLayoutsQuery();
 
   // Event Handlers 
   const onSelectLayout = (selectedOption) => dispatch(updateLayout(selectedOption.value));
@@ -28,7 +25,7 @@ function Settings() {
 
   // Data Transformations
   const rulesetOptions = rulesets.map((ruleset) => ({ value: ruleset.id, label: ruleset.name }));
-  const layoutOptions = [];
+  const layoutOptions = layouts.map((layout) => ({ value: layout.layout_id, label: layout.name }));;
   const selectedLayoutOption = layoutOptions.find(({ value }) => value === layoutId);
   const selectedRulesetOption = rulesetOptions.find(({ value }) => value === rulesetId)
 
@@ -44,6 +41,8 @@ function Settings() {
         value={selectedLayoutOption}
         onChange={onSelectLayout}
         options={layoutOptions}
+        isDisabled={layoutsLoading || layoutsError}
+        isLoading={layoutsLoading}
         placeholder="Layout"
       />
       <div className="settings-divider"></div>
@@ -52,9 +51,8 @@ function Settings() {
         value={selectedRulesetOption}
         onChange={onSelectRuleset}
         options={rulesetOptions}
-        // Question why are we disabling this select when it's loading or an error?
-        isDisabled={isLoading || error}
-        isLoading={isLoading}
+        isDisabled={rulesetsLoading || rulesetsError}
+        isLoading={rulesetsLoading}
         placeholder="Ruleset"
       />
       <div className="settings-divider"></div>

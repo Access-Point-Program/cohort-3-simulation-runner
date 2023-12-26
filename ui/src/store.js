@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import settingsReducer from './store/settingsSlice';
 import {rulesetsApi} from './store/ruleSetsSlice';
+import {layoutsApi} from './store/layOutsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -8,8 +9,9 @@ export const store = configureStore({
     settings: settingsReducer,
     // API Slice
     [rulesetsApi.reducerPath]: rulesetsApi.reducer,
+    [layoutsApi.reducerPath]: layoutsApi.reducer,
   },
   // Middleware is needed for using API Slices
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(rulesetsApi.middleware),
+    getDefaultMiddleware().concat(rulesetsApi.middleware, layoutsApi.middleware),
 })
