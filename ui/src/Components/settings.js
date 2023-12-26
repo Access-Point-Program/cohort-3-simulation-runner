@@ -34,7 +34,7 @@ function Settings() {
 
   // Data Transformations
   const rulesetOptions = rulesets.map((ruleset) => ({ value: ruleset.id, label: ruleset.name }));
-  const layoutOptions = layouts.map((layout) => ({ value: layout.layout_id, label: layout.name }));;
+  const layoutOptions = layouts.map((layout) => ({ value: layout.id, label: layout.name }));;
   const selectedLayoutOption = layoutOptions.find(({ value }) => value === layoutId);
   const selectedRulesetOption = rulesetOptions.find(({ value }) => value === rulesetId);
   const canRunSimulation = layoutId !== null && rulesetId !== null;
