@@ -18,7 +18,6 @@ class RulesEngine {
     }
 
     buildEngine() {
-        /*
         this._ruleset.rules.forEach((rule) => {
             this._engine.addRule({
                 conditions: {
@@ -34,38 +33,6 @@ class RulesEngine {
                 },
             });
         });
-        */
-        this._engine.addRule({
-            conditions: {
-              any: [{
-                all: [{
-                  fact: 'gameDuration',
-                  operator: 'equal',
-                  value: 40
-                }, {
-                  fact: 'personalFoulCount',
-                  operator: 'greaterThanInclusive',
-                  value: 5
-                }]
-              }, {
-                all: [{
-                  fact: 'gameDuration',
-                  operator: 'equal',
-                  value: 48
-                }, {
-                  fact: 'personalFoulCount',
-                  operator: 'greaterThanInclusive',
-                  value: 6
-                }]
-              }]
-            },
-            event: {  // define the event to fire when the conditions evaluate truthy
-              type: 'fouledOut',
-              params: {
-                message: 'Player has fouled out!'
-              }
-            }
-          });
     }
 
     async runSimulation() {
@@ -99,17 +66,11 @@ class RulesEngine {
     generateFacts(row, column, direction) {
         // TODO get facts for this row and column
         return {
-            personalFoulCount: 6,
-            gameDuration: 40
-        }
-        /*
-        return {
             "FRONT": "OPEN",
             "RIGHT": "OPEN",
             "LEFT": "OPEN",
             "BEHIND": "OPEN"
         }
-        */
     }
 
     moves() {
