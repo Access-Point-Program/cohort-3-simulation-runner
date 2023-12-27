@@ -70,8 +70,8 @@ class RulesEngine {
                 // IF match end row and column break out of loop and mark succeeded as true
                 if (this.isMatchEnd(currentRow, currentColumn)) {
                     succeeded = true;
-                    break;
                 }
+                break;
             //}
         } catch (err) {
             console.log(err);
