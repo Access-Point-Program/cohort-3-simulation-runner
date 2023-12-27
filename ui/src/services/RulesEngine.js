@@ -72,7 +72,7 @@ class RulesEngine {
                     succeeded = true;
                     break;
                 }
-            //}
+            }
         } catch (err) {
             console.log(err);
             throw err;
