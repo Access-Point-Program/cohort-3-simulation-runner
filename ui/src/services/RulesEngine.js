@@ -1,101 +1,115 @@
 const { Engine } = require("json-rules-engine");
 
 class RulesEngine {
-    _ruleset = null;
-    _layout = null;
-    __maxIterations = null;
-    _engine = null;
-    _succeeded = null;
-    _moves = null;
+  _ruleset = null;
+  _layout = null;
+  _maxIterations = null;
+  _engine = null;
+  _succeeded = null;
+  _moves = null;
 
-    constructor(ruleset, layout, maxIterations) {
-        this._ruleset = ruleset;
-        this._layout = layout;
-        this._maxIterations = maxIterations;
-        this._engine = new Engine();
-        this._succeeded = false;
-        this._moves = [];
-    }
+  constructor(ruleset, layout, maxIterations) {
+    this._ruleset = ruleset;
+    this._layout = layout;
+    this._maxIterations = maxIterations;
+    this._engine = new Engine();
+    this._succeeded = false;
+    this._moves = [];
+  }
 
-    buildEngine() {
-        this._ruleset.rules.forEach((rule) => {
-            this._engine.addRule({
-                conditions: {
-                    all: rule.conditions.map((condition) => ({
-                        fact: condition.fact_type,
-                        operator: "equal",
-                        value: condition.value_type,
-                    })),
-                },
-                event: {
-                    type: rule.event_type,
-                    params: {},
-                },
-            });
-        });
-    }
-
-    async runSimulation() {
-        try {
-            // TODO: Find the start
-            const currentRow = 0;
-            const currentColumn = 0;
-            // TODO We don't have this in this class
-            const currentDirection = "";
-
-            // TODO: Find the end 
-            const endRow = 1;
-            const endColumn = 1;
-
-            for (let i = 0; i < this._maxIterations; ++i) {
-                const facts = this.generateFacts(currentRow, currentColumn, currentDirection);
-                const events = await this._engine.run(facts);
-                console.log(events);
-                // IF no events, throw error
-                if (events.length === 0) {
-                    throw err;
-                }
-                // IF one invalid event, throw error
-                if (events.length === 1) {
-                    throw err;
-                }
-                // IF valid event add to moves
-                if (this.isValidEvent(events)) {
-                    moves.push(events);
-                }
-                // IF valid event change currentRow, currentColumn, currentDirection
-                if (this.isValidEvent(events)) {
-                    this.changeEvent(events, currentRow, currentColumn, currentDirection);
-                }
-                // IF match end row and column break out of loop and mark succeeded as true
-                if (this.isMatchEnd(currentRow, currentColumn)) {
-                    succeeded = true;
-                    break;
-                }
-            }
-        } catch (err) {
-            console.log(err);
-            throw err;
+  findStart(layout) {
+    for (let i = 0; i < layout.length; i++) {
+      for (let j = 0; j < layout[i].length; j++) {
+        if (layout[i][j] === 2) {
+          return { row: i, column: j };
         }
+      }
     }
+    return { row: 0, column: 0 };
+  }
 
-    generateFacts(row, column, direction) {
-        // TODO get facts for this row and column
-        return {
-            "FRONT": "OPEN",
-            "RIGHT": "OPEN",
-            "LEFT": "OPEN",
-            "BEHIND": "OPEN"
+  findEnd(layout) {
+    for (let i = 0; i < layout.length; i++) {
+      for (let j = 0; j < layout[i].length; j++) {
+        if (layout[i][j] === 3) {
+          return { row: i, column: j };
         }
+      }
     }
+  }
 
-    moves() {
-        return this._moves;
-    }
+  buildEngine() {
+    this._ruleset.rules.forEach((rule) => {
+      this._engine.addRule({
+        conditions: {
+          all: rule.conditions.map((condition) => ({
+            fact: condition.fact_type,
+            operator: "equal",
+            value: condition.value_type,
+          })),
+        },
+        event: {
+          type: rule.event_type,
+          params: {},
+        },
+      });
+    });
+  }
 
-    succeeded() {
-        return this._succeeded;
+  async runSimulation() {
+    const currentPosition = this.findStart(this._layout);
+    const currentDirection = this._layout.direction;
+    console.log("Current Position:", currentPosition);
+    const endPosition = this.findEnd(this._layout);
+    const { row: endRow, column: endColumn } = endPosition || {
+      row: 1,
+      column: 1,
+    }; // Set default values if endPosition not found
+
+    for (let i = 0; i < this._maxIterations; ++i) {
+      // Generate facts using current position and direction
+      const facts = this.generateFacts(
+        currentPosition.row,
+        currentPosition.column,
+        currentDirection
+      );
+
+      // Run the rules engine with generated facts
+      const events = await this._engine.run(facts);
+      console.log(events);
+
+      // TODO: Update currentPosition, currentDirection based on events and rules
+
+      // Check for the end condition
+      if (
+        currentPosition.row === endRow &&
+        currentPosition.column === endColumn
+      ) {
+        this._succeeded = true;
+        break;
+      }
+
+      // TODO: Update currentPosition, currentDirection based on the simulation logic
     }
+  }
+
+  generateFacts(row, column, direction) {
+    // TODO: get facts for this row and column
+    return {
+      FRONT: "OPEN",
+      RIGHT: "OPEN",
+      LEFT: "OPEN",
+      BEHIND: "OPEN",
+    };
+  }
+
+  moves() {
+    return this._moves;
+  }
+
+  succeeded() {
+    return this._succeeded;
+  }
 }
 
 export default RulesEngine;
