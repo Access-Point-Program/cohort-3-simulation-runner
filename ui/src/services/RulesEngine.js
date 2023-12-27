@@ -47,7 +47,7 @@ class RulesEngine {
             const endRow = 1;
             const endColumn = 1;
 
-            //for (let i = 0; i < this._maxIterations; ++i) {
+            for (let i = 0; i < this._maxIterations; ++i) {
                 const facts = this.generateFacts(currentRow, currentColumn, currentDirection);
                 const events = await this._engine.run(facts);
                 console.log(events);
@@ -70,8 +70,8 @@ class RulesEngine {
                 // IF match end row and column break out of loop and mark succeeded as true
                 if (this.isMatchEnd(currentRow, currentColumn)) {
                     succeeded = true;
+                    break;
                 }
-                break;
             //}
         } catch (err) {
             console.log(err);
