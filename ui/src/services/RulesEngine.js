@@ -3,7 +3,7 @@ const { Engine } = require("json-rules-engine");
 class RulesEngine {
   _ruleset = null;
   _layout = null;
-  __maxIterations = null;
+  _maxIterations = null;
   _engine = null;
   _succeeded = null;
   _moves = null;
@@ -19,7 +19,7 @@ class RulesEngine {
     this._currentDirection = layout.direction;
   }
 
-  findStart( layout) {
+  findStart(layout) {
     for (let i = 0; i < layout.length; i++) {
       for (let j = 0; j < layout[i].length; j++) {
         if (layout[i][j] === 2) {
@@ -27,9 +27,10 @@ class RulesEngine {
         }
       }
     }
+    return { row: 0, column: 0 };
   }
 
-  findEnd( layout) {
+  findEnd(layout) {
     for (let i = 0; i < layout.length; i++) {
       for (let j = 0; j < layout[i].length; j++) {
         if (layout[i][j] === 3) {
@@ -58,32 +59,44 @@ class RulesEngine {
   }
 
   async runSimulation() {
-  
-    // TODO We don't have this in this class
-    const currentDirection = "";
+    const currentPosition = this.findStart(this._layout);
+    const currentDirection = this._layout.direction;
+    console.log("Current Position:", currentPosition);
+    const endPosition = this.findEnd(this._layout);
+    const { row: endRow, column: endColumn } = endPosition || {
+      row: 1,
+      column: 1,
+    }; // Set default values if endPosition not found
 
-    // TODO: Find the end Done
-    const endRow = 1;
-    const endColumn = 1;
+    for (let i = 0; i < this._maxIterations; ++i) {
+      // Generate facts using current position and direction
+      const facts = this.generateFacts(
+        currentPosition.row,
+        currentPosition.column,
+        currentDirection
+      );
 
-    //for (let i = 0; i < this._maxIterations; ++i) {
-    const facts = this.generateFacts(
-      currentRow,
-      currentColumn,
-      currentDirection
-    );
-    const events = await this._engine.run(facts);
-    console.log(events);
-    // IF no events, throw error
-    // IF one invalid event, throw error
-    // IF valid event add to moves
-    // IF valid event change currentRow, currentColumn, currentDirection
-    // IF match end row and column break out of loop and mark succeeded as true
-    //}
+      // Run the rules engine with generated facts
+      const events = await this._engine.run(facts);
+      console.log(events);
+
+      // TODO: Update currentPosition, currentDirection based on events and rules
+
+      // Check for the end condition
+      if (
+        currentPosition.row === endRow &&
+        currentPosition.column === endColumn
+      ) {
+        this._succeeded = true;
+        break;
+      }
+
+      // TODO: Update currentPosition, currentDirection based on the simulation logic
+    }
   }
 
   generateFacts(row, column, direction) {
-    // TODO get facts for this row and column
+    // TODO: get facts for this row and column
     return {
       FRONT: "OPEN",
       RIGHT: "OPEN",
