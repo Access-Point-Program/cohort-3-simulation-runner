@@ -81,7 +81,7 @@ class RulesEngine {
       console.log(events);
 
       // TODO: Update currentPosition, currentDirection based on events and rules
-
+      
       
       const newPosition = this.findEnd(this._layout);
       const newRow = newPosition.row;
