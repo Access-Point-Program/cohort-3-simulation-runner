@@ -60,7 +60,7 @@ class RulesEngine {
 
   async runSimulation() {
     const currentPosition = this.findStart(this._layout);
-    const currentDirection = this._currentDirection;
+    let currentDirection = this._currentDirection;
     console.log("Current Position:", currentPosition);
     const endPosition = this.findEnd(this._layout);
     const { row: endRow, column: endColumn } = endPosition || {
@@ -81,11 +81,8 @@ class RulesEngine {
       console.log(events);
 
       // TODO: Update currentPosition, currentDirection based on events and rules
-      /**
-       * Take the result of the iteration and update currentPosition
-       * Find new currentDirection after events are ran
-       */
 
+      
       const newPosition = this.findEnd(this._layout);
       const newRow = newPosition.row;
       const newColumn = newPosition.column;
@@ -95,6 +92,40 @@ class RulesEngine {
         column: newColumn
       };
       console.log(`New position of ${currentPosition} is ${updatedPosition}`);
+
+
+      const updatedDirection = {
+        get currentDirection() {
+          return this._currentDirection;
+        },
+
+        set currentDirection(newDirection) {
+          this._currentDirection = newDirection;
+          console.log(`Current direction is now ${this._currentDirection}`);
+        },
+
+        evaluateDirection(currentPosition, newPosition) {
+          const rowFinder = currentPosition.row - newPosition.row;
+          const columnFinder = currentPosition.column - newPosition.column;
+
+          // Front, right, left, behind
+          if (rowFinder === 0 && columnFinder === 0) {
+            return this._currentDirection // This means there was no change
+          } else if (rowFinder === 0) {
+            return columnFinder > 0 ? 'BEHIND' : 'FRONT';
+          } else if (columnFinder === 0) {
+            return rowFinder > 0 ? 'RIGHT' : 'LEFT';
+          } else {
+            return this._currentDirection;
+          }
+        }
+      };
+
+      updatedDirection.currentDirection = updatedDirection.evaluateDirection(currentPosition, newPosition);
+
+      console.log(updatedDirection.currentDirection);
+
+
 
       // Check for the end condition
       if (
