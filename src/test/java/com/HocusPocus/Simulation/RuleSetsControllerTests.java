@@ -74,11 +74,11 @@ public class RuleSetsControllerTests {
             .then().statusCode(200);
         }
     @Test
-        public void getRuleSetById() {
-            Long getRuleSetById = 1l;
-            given()
-                    .pathParam("id", getRuleSetById)
-                    .when().get("/ruleset/{id}")
-                    .then().statusCode(204);
-        }
+    public void getRuleSetById() {
+        Long getRuleSetById = 1l;
+        given()
+                .pathParam("id", getRuleSetById)
+                .when().get("/ruleset/{id}")
+                .then().statusCode(204);
     }
+}
