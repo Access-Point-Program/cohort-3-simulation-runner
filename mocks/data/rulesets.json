@@ -6,11 +6,28 @@
     "rules": [
       {
         "id": 32,
-        "priority": 3.0,
+        "priority": 0,
         "event_type": "RIGHT",
         "conditions": [
           {
             "id": 51,
+            "fact_type": "RIGHT",
+            "value_type": "END"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "priority": 0.25,
+        "event_type": "RIGHT",
+        "conditions": [
+          {
+            "id": 2,
+            "fact_type": "FRONT",
+            "value_type": "WALL"
+          },
+          {
+            "id": 2,
             "fact_type": "RIGHT",
             "value_type": "EMPTY"
           }
@@ -18,13 +35,18 @@
       },
       {
         "id": 2,
-        "priority": 0.25,
-        "event_type": "FORWARD",
+        "priority": 1,
+        "event_type": "LEFT",
         "conditions": [
           {
             "id": 2,
             "fact_type": "FRONT",
-            "value_type": "END"
+            "value_type": "EMPTY"
+          },
+          {
+            "id": 2,
+            "fact_type": "LEFT",
+            "value_type": "EMPTY"
           }
         ]
       },
@@ -36,12 +58,7 @@
           {
             "id": 28,
             "fact_type": "FRONT",
-            "value_type": "WALL"
-          },
-          {
-            "id": 52,
-            "fact_type": "RIGHT",
-            "value_type": "WALL"
+            "value_type": "EMPTY"
           }
         ]
       }
