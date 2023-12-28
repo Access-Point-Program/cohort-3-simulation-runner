@@ -60,7 +60,7 @@ class RulesEngine {
 
   async runSimulation() {
     const currentPosition = this.findStart(this._layout);
-    const currentDirection = this._layout.direction;
+    const currentDirection = this._currentDirection;
     console.log("Current Position:", currentPosition);
     const endPosition = this.findEnd(this._layout);
     const { row: endRow, column: endColumn } = endPosition || {
