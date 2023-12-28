@@ -80,6 +80,10 @@ class RulesEngine {
 
       // TODO: Update currentPosition, currentDirection based on events and rules
 
+
+
+
+      
       // Check for the end condition
       if (
         currentPosition.row === endRow &&
@@ -94,13 +98,34 @@ class RulesEngine {
   }
 
   generateFacts(row, column, direction) {
-    // TODO: get facts for this row and column
-    return {
+  
+
+
+    const frontFact = this.checkObstacles(row-1, column);
+    const rightFact = this.checkObstacles(row, column+1);
+    const leftFact = this.checkObstacles(row, column - 1);
+    const behindFact = this.checkObstacles(row+1 , column);
+ 
+        return {
       FRONT: "OPEN",
       RIGHT: "OPEN",
       LEFT: "OPEN",
       BEHIND: "OPEN",
     };
+  }
+
+
+  checkObstacles(row,column){
+    if(row>= 0 && 
+        row < this._layout.length&& 
+        column>= 0 &&
+        column< this._layout[row].length)
+        {const cellValue = this._layout[row][column];
+        return cellValue === 1 ? "OBSTACLE" : "OPEN";
+        } else{
+            return "OBSTACLE";
+        }
+
   }
 
   moves() {
