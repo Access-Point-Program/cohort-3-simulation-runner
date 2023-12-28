@@ -81,6 +81,20 @@ class RulesEngine {
       console.log(events);
 
       // TODO: Update currentPosition, currentDirection based on events and rules
+      /**
+       * Take the result of the iteration and update currentPosition
+       * Find new currentDirection after events are ran
+       */
+
+      const newPosition = this.findEnd(this._layout);
+      const newRow = newPosition.row;
+      const newColumn = newPosition.column;
+
+      const updatedPosition = {
+        row: newRow,
+        column: newColumn
+      };
+      console.log(`New position of ${currentPosition} is ${updatedPosition}`);
 
       // Check for the end condition
       if (
