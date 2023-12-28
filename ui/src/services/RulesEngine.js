@@ -7,6 +7,7 @@ class RulesEngine {
   _engine = null;
   _succeeded = null;
   _moves = null;
+  _currentDirection = null;
 
   constructor(ruleset, layout, maxIterations) {
     this._ruleset = ruleset;
@@ -15,6 +16,7 @@ class RulesEngine {
     this._engine = new Engine();
     this._succeeded = false;
     this._moves = [];
+    this._currentDirection = layout.direction;
   }
 
   findStart( layout) {
