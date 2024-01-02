@@ -2,7 +2,8 @@ import React from "react";
 import SideBar from "./Components/Sidebar";
 import Grid from "./Components/grid";
 import Legend from "./Components/Legend";
-import Settings from "./Components/Settings"
+import Settings from "./Components/Settings";
+import MoveList from "./Components/moveList";
 import "./App.css"; // Import your CSS file for styling
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
       <div className="content-container">
         <div className="content-container">
           <Legend />
-          <Grid data={{}} />
+          <Grid />
+          <MoveList />
         </div>
 
         <div className="settings-container">

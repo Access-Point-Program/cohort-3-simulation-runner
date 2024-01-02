@@ -1,19 +1,25 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-import {rulesetsApi} from './ruleSetsSlice';
-import {layoutsApi} from './layOutsSlice';
+import { rulesetsApi } from "./ruleSetsSlice";
+import { layoutsApi } from "./layOutsSlice";
 import RulesEngine from "../services/RulesEngine";
 
 export const runSimulation = createAsyncThunk(
-  'simulation/runSimulation',
-  async ({ rulesetId, layoutId, maxIterations}, thunkAPI) => {
+  "simulation/runSimulation",
+  async ({ rulesetId, layoutId, maxIterations }, thunkAPI) => {
     const { dispatch } = thunkAPI;
-    const { data: ruleset} = await dispatch(rulesetsApi.endpoints.getRuleSetById.initiate(rulesetId));
-    const { data: layout} = await dispatch(layoutsApi.endpoints.getLayoutByID.initiate(layoutId));
+    const { data: ruleset } = await dispatch(
+      rulesetsApi.endpoints.getRuleSetById.initiate(rulesetId)
+    );
+    const { data: layout } = await dispatch(
+      layoutsApi.endpoints.getLayoutByID.initiate(layoutId)
+    );
     const rulesEngine = new RulesEngine(ruleset, layout, maxIterations);
 
     rulesEngine.buildEngine();
     await rulesEngine.runSimulation();
+
+    console.log('moves', rulesEngine.moves())
 
     return {
       grid: layout.cells,
@@ -21,7 +27,7 @@ export const runSimulation = createAsyncThunk(
       moves: rulesEngine.moves(),
     };
   }
-)
+);
 
 export const simulationSlice = createSlice({
   name: "simulation",
@@ -31,6 +37,7 @@ export const simulationSlice = createSlice({
     grid: null,
     moves: [],
     succeeded: null,
+    rulesets: [],
   },
   extraReducers: (builder) => {
     builder.addCase(runSimulation.pending, (state) => {
@@ -47,10 +54,11 @@ export const simulationSlice = createSlice({
       state.grid = action.payload.grid;
       state.moves = action.payload.moves;
       state.succeeded = action.payload.succeeded;
+      state.rulesets = action.payload.rulesets;
     });
 
     builder.addCase(runSimulation.rejected, (state, action) => {
-      state.error = 'Ope!';
+      state.error = "Ope!";
     });
   },
 });
