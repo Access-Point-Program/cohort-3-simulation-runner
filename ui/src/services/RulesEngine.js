@@ -1,5 +1,29 @@
 const { Engine } = require("json-rules-engine");
 
+const CELL_STATE = {
+  // Layouts Cell State
+  OPEN: 0,
+  WALL: 1,
+  START: 2,
+  END: 3,
+  // Custom Props
+  PATH: 4,
+};
+
+const VALUE_TYPE = {
+  WALL: 'WALL',
+  EMPTY: 'EMPTY',
+  END: 'END'
+};
+
+const cellStateToValueType = {
+  [CELL_STATE.OPEN]: VALUE_TYPE.EMPTY,
+  [CELL_STATE.WALL]: VALUE_TYPE.WALL,
+  [CELL_STATE.START]: VALUE_TYPE.EMPTY,
+  [CELL_STATE.END]: VALUE_TYPE.END,
+  [CELL_STATE.PATH]: VALUE_TYPE.EMPTY,
+}
+
 class RulesEngine {
   _ruleset = null;
   _layout = null;
@@ -7,6 +31,7 @@ class RulesEngine {
   _engine = null;
   _succeeded = null;
   _moves = null;
+  _currentDirection = null;
 
   constructor(ruleset, layout, maxIterations) {
     this._ruleset = ruleset;
@@ -15,27 +40,31 @@ class RulesEngine {
     this._engine = new Engine();
     this._succeeded = false;
     this._moves = [];
+    this._currentDirection = layout.direction;
   }
 
-  findStart(layout) {
-    for (let i = 0; i < layout.length; i++) {
-      for (let j = 0; j < layout[i].length; j++) {
-        if (layout[i][j] === 2) {
+  findStart() {
+    for (let i = 0; i < this._layout.cells.length; i++) {
+      for (let j = 0; j < this._layout.cells[i].length; j++) {
+        if (this._layout.cells[i][j] === CELL_STATE.START) {
           return { row: i, column: j };
         }
       }
     }
-    return { row: 0, column: 0 };
+
+    throw 'unable to find start';
   }
 
-  findEnd(layout) {
-    for (let i = 0; i < layout.length; i++) {
-      for (let j = 0; j < layout[i].length; j++) {
-        if (layout[i][j] === 3) {
+  findEnd() {
+    for (let i = 0; i < this._layout.cells.length; i++) {
+      for (let j = 0; j < this._layout.cells[i].length; j++) {
+        if (this._layout.cells[i][j] === CELL_STATE.END) {
           return { row: i, column: j };
         }
       }
     }
+
+    throw 'unable to find end';
   }
 
   buildEngine() {
@@ -57,61 +86,156 @@ class RulesEngine {
   }
 
   async runSimulation() {
-    const currentPosition = this.findStart(this._layout);
-    const currentDirection = this._layout.direction;
-    console.log("Current Position:", currentPosition);
-    const endPosition = this.findEnd(this._layout);
-    const { row: endRow, column: endColumn } = endPosition || {
-      row: 1,
-      column: 1,
-    }; // Set default values if endPosition not found
+    const currentPosition = this.findStart();
+    const endPosition = this.findEnd();
 
     for (let i = 0; i < this._maxIterations; ++i) {
-      // Generate facts using current position and direction
       const facts = this.generateFacts(
         currentPosition.row,
         currentPosition.column,
-        currentDirection
+        this._currentDirection
       );
 
-      // Run the rules engine with generated facts
-      const events = await this._engine.run(facts);
-      console.log(events);
-
-      // TODO: Update currentPosition, currentDirection based on events and rules
-
-
-
-
-      
-      // Check for the end condition
-      if (
-        currentPosition.row === endRow &&
-        currentPosition.column === endColumn
-      ) {
-        this._succeeded = true;
-        break;
+      const { events } = await this._engine.run(facts);
+      if (events.length === 0) {
+        // Rules Engine returned no possible option.
+        this._succeeded = false;
+        return;
       }
 
-      // TODO: Update currentPosition, currentDirection based on the simulation logic
+      const [{ type: action }] = events;
+
+      console.log({ facts, action, currentPosition, direction: this._currentDirection, moves: this._moves });
+      switch (action) {
+        case 'FORWARD':
+          if (facts.FRONT === VALUE_TYPE.WALL) {
+            // can't move into a wall, not playing Zelda.
+            this._succeeded = false;
+            return;
+          }
+
+          this.proccessMoveForward(currentPosition);
+          this._moves.push({ ...currentPosition, direction: this._currentDirection, action });
+
+          if (currentPosition.column === endPosition.column && currentPosition.row === endPosition.row) {
+            // We found the end.
+            this._succeeded = true;
+            return;
+          }
+          break;
+        case 'RIGHT':
+          this.proccessTurnRight();
+          this._moves.push({ ...currentPosition, direction: this._currentDirection, action });
+          break;
+        case 'LEFT':
+          this.proccessTurnLeft();
+          this._moves.push({ ...currentPosition, direction: this._currentDirection, action });
+          break;
+        default:
+          // Rules Engine is very confused
+          this._succeeded = false;
+          return;
+      }
+
+      console.log({ facts, action, currentPosition, direction: this._currentDirection, moves: this._moves });
+    }
+  }
+
+  proccessMoveForward(position) {
+    switch (this._currentDirection) {
+      case 'NORTH':
+        position.row--;
+        break;
+      case 'SOUTH':
+        position.row++;
+        break;
+      case 'EAST':
+        position.column++;
+        break;
+      case 'WEST':
+        position.column--;
+        break;
+    }
+  }
+
+  proccessTurnRight() {
+    switch (this._currentDirection) {
+      case 'NORTH':
+        this._currentDirection = 'EAST';
+        break;
+      case 'SOUTH':
+        this._currentDirection = 'WEST';
+        break;
+      case 'EAST':
+        this._currentDirection = 'SOUTH';
+        break;
+      case 'WEST':
+        this._currentDirection = 'NORTH';
+        break;
+    }
+  }
+
+  proccessTurnLeft() {
+    switch (this._currentDirection) {
+      case 'NORTH':
+        this._currentDirection = 'WEST';
+        break;
+      case 'SOUTH':
+        this._currentDirection = 'EAST';
+        break;
+      case 'EAST':
+        this._currentDirection = 'NORTH';
+        break;
+      case 'WEST':
+        this._currentDirection = 'SOUTH';
+        break;
     }
   }
 
   generateFacts(row, column, direction) {
-  
+    const directionalFacts = {
+      NORTH: cellStateToValueType[this.getCellState(row - 1, column)],
+      SOUTH: cellStateToValueType[this.getCellState(row + 1, column)],
+      EAST: cellStateToValueType[this.getCellState(row, column + 1)],
+      WEST: cellStateToValueType[this.getCellState(row, column - 1)]
+    }
 
-
-    const frontFact = this.checkObstacles(row-1, column);
-    const rightFact = this.checkObstacles(row, column+1);
-    const leftFact = this.checkObstacles(row, column - 1);
-    const behindFact = this.checkObstacles(row+1 , column);
- 
+    switch (direction) {
+      case 'NORTH':
         return {
-      FRONT: "OPEN",
-      RIGHT: "OPEN",
-      LEFT: "OPEN",
-      BEHIND: "OPEN",
-    };
+          FRONT: directionalFacts.NORTH,
+          RIGHT: directionalFacts.EAST,
+          LEFT: directionalFacts.WEST,
+          BEHIND: directionalFacts.SOUTH,
+        };
+      case 'SOUTH':
+        return {
+          FRONT: directionalFacts.SOUTH,
+          RIGHT: directionalFacts.WEST,
+          LEFT: directionalFacts.EAST,
+          BEHIND: directionalFacts.NORTH,
+        };
+      case 'EAST':
+        return {
+          FRONT: directionalFacts.EAST,
+          RIGHT: directionalFacts.SOUTH,
+          LEFT: directionalFacts.NORTH,
+          BEHIND: directionalFacts.WEST,
+        };
+      case 'WEST':
+        return {
+          FRONT: directionalFacts.WEST,
+          RIGHT: directionalFacts.NORTH,
+          LEFT: directionalFacts.SOUTH,
+          BEHIND: directionalFacts.EAST,
+        };
+    }
+  }
+
+  getCellState(row, col) {
+    if (row < 0 || row > 8) return CELL_STATE.WALL;
+    if (col < 0 || col > 8) return CELL_STATE.WALL;
+    return this._layout.cells[row][col];
   }
 
 
