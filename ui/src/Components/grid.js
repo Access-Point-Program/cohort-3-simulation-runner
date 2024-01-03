@@ -4,6 +4,8 @@ import "./Grid.css";
 
 function Grid() {
   const grid = useSelector((state) => state.simulation.grid);
+  const moves = useSelector((state) => state.simulation.moves); // Assuming moves is available in the redux state
+  const success = useSelector((state) => state.simulation.success);
   const maze = grid ?? [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -16,16 +18,13 @@ function Grid() {
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
 
-
-  function ispath(){
-
-
-
+  function isPath(row, column) {
+    console.table(moves);
+    return moves.some((move) => move.row === row && move.column === column);
   }
-  function coloringBook(cellValue) {
+
+  function coloringBook(cellValue, row, column) {
     switch (cellValue) {
-      case 0:
-        return "cell-white";
       case 1:
         return "cell-grey";
       case 2:
@@ -33,6 +32,9 @@ function Grid() {
       case 3:
         return "cell-red";
       default:
+        if (isPath(row, column)) {
+          return "cell-light-green";
+        }
         return "cell-white";
     }
   }
@@ -40,7 +42,10 @@ function Grid() {
   const gridJSX = maze.map((row, rowIndex) => (
     <div key={rowIndex} className="maze-row">
       {row.map((cell, columnIndex) => (
-        <div key={columnIndex} className={`cell ${coloringBook(cell)}`} />
+        <div
+          key={columnIndex}
+          className={`cell ${coloringBook(cell, rowIndex, columnIndex)}`}
+        />
       ))}
     </div>
   ));
@@ -49,8 +54,3 @@ function Grid() {
 }
 
 export default Grid;
-
-
-// To indefinty if row is path if cell's Row & Column exhist in the moves array
-
-// moves.find rows == rows  & columb == coluns

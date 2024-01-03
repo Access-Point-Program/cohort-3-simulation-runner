@@ -2,7 +2,6 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import "./Legend.css"; // Import the CSS file
 
-
 const Legend = () => {
   return (
     <Form className="legend-form">

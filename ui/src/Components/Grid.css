@@ -49,6 +49,7 @@
     background-color: rgb(249, 0, 4);
 }
 
-.cell-4 {
-    background-color: green;
+
+.cell-light-green{
+    background-color: lightgreen;
 }
