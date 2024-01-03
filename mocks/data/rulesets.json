@@ -19,12 +19,34 @@
       {
         "id": 2,
         "priority": 0.25,
-        "event_type": "RI",
+        "event_type": "RIGHT",
         "conditions": [
           {
             "id": 2,
             "fact_type": "FRONT",
-            "value_type": "END"
+            "value_type": "WALL"
+          },
+          {
+            "id": 2,
+            "fact_type": "RIGHT",
+            "value_type": "EMPTY"
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "priority": 1,
+        "event_type": "LEFT",
+        "conditions": [
+          {
+            "id": 2,
+            "fact_type": "FRONT",
+            "value_type": "EMPTY"
+          },
+          {
+            "id": 2,
+            "fact_type": "LEFT",
+            "value_type": "EMPTY"
           }
         ]
       },
@@ -36,12 +58,7 @@
           {
             "id": 28,
             "fact_type": "FRONT",
-            "value_type": "WALL"
-          },
-          {
-            "id": 52,
-            "fact_type": "RIGHT",
-            "value_type": "WALL"
+            "value_type": "EMPTY"
           }
         ]
       }
