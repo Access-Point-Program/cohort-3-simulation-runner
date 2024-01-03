@@ -4,8 +4,9 @@ import "./Grid.css";
 
 function Grid() {
   const grid = useSelector((state) => state.simulation.grid);
+  const succeeded = useSelector((state) => state.simulation.succeeded);
   const moves = useSelector((state) => state.simulation.moves); // Assuming moves is available in the redux state
-  const success = useSelector((state) => state.simulation.success);
+
   const maze = grid ?? [
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -33,7 +34,10 @@ function Grid() {
         return "cell-red";
       default:
         if (isPath(row, column)) {
-          return "cell-light-green";
+          if (succeeded) {
+            return "cell-light-green";
+          }
+          return "cell-barbie-pink";
         }
         return "cell-white";
     }
