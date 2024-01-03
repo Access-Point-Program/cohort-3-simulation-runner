@@ -1,6 +1,165 @@
 [
   
   {
+    "id": 200,
+    "name": "Timmy",
+    "creation_date": "2024-01-02T21:30:39.187+00:00",
+    "rules": [
+        {
+            "id": 9,
+            "priority": 1.0,
+            "event_type": "FORWARD",
+            "conditions": [
+                {
+                    "id": 11,
+                    "fact_type": "FRONT",
+                    "value_type": "END"
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "priority": 2.0,
+            "event_type": "LEFT",
+            "conditions": [
+                {
+                    "id": 12,
+                    "fact_type": "FRONT",
+                    "value_type": "WALL"
+                },
+                {
+                    "id": 13,
+                    "fact_type": "RIGHT",
+                    "value_type": "WALL"
+                }
+            ]
+        }
+    ]
+  },
+  {
+      "id": 100,
+      "name": "Timmy Ruleset",
+      "creation_date": "2024-01-02T21:17:03.953+00:00",
+      "rules": [
+          {
+              "id": 1,
+              "priority": 1.0,
+              "event_type": "FORWARD",
+              "conditions": [
+                  {
+                      "id": 1,
+                      "fact_type": "FRONT",
+                      "value_type": "END"
+                  }
+              ]
+          },
+          {
+              "id": 2,
+              "priority": 2.0,
+              "event_type": "RIGHT",
+              "conditions": [
+                  {
+                      "id": 2,
+                      "fact_type": "RIGHT",
+                      "value_type": "END"
+                  }
+              ]
+          },
+          {
+              "id": 3,
+              "priority": 3.0,
+              "event_type": "LEFT",
+              "conditions": [
+                  {
+                      "id": 3,
+                      "fact_type": "LEFT",
+                      "value_type": "END"
+                  }
+              ]
+          },
+          {
+              "id": 4,
+              "priority": 4.0,
+              "event_type": "FORWARD",
+              "conditions": [
+                  {
+                      "id": 4,
+                      "fact_type": "FRONT",
+                      "value_type": "EMPTY"
+                  }
+              ]
+          },
+          {
+              "id": 5,
+              "priority": 5.0,
+              "event_type": "RIGHT",
+              "conditions": [
+                  {
+                      "id": 5,
+                      "fact_type": "FRONT",
+                      "value_type": "WALL"
+                  },
+                  {
+                      "id": 6,
+                      "fact_type": "LEFT",
+                      "value_type": "WALL"
+                  }
+              ]
+          },
+          {
+              "id": 6,
+              "priority": 6.0,
+              "event_type": "LEFT",
+              "conditions": [
+                  {
+                      "id": 7,
+                      "fact_type": "FRONT",
+                      "value_type": "WALL"
+                  },
+                  {
+                      "id": 8,
+                      "fact_type": "RIGHT",
+                      "value_type": "WALL"
+                  }
+              ]
+          },
+          {
+              "id": 7,
+              "priority": 7.0,
+              "event_type": "RIGHT",
+              "conditions": [
+                  {
+                      "id": 9,
+                      "fact_type": "BEHIND",
+                      "value_type": "END"
+                  },
+                  {
+                      "id": 16,
+                      "fact_type": "LEFT",
+                      "value_type": "WALL"
+                  }
+              ]
+          },
+          {
+              "id": 11,
+              "priority": 6.5,
+              "event_type": "LEFT",
+              "conditions": [
+                  {
+                      "id": 14,
+                      "fact_type": "BEHIND",
+                      "value_type": "END"
+                  },
+                  {
+                      "id": 15,
+                      "fact_type": "RIGHT",
+                      "value_type": "WALL"
+                  }
+              ]
+          }
+      ]
+  },
+  {
       "id": 2,
       "name":"Special Ruleset",
       "creation_date": "2024-02-02T21:17:03.953+00:00",
