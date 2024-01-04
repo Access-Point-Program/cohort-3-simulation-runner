@@ -1,17 +1,20 @@
 package com.HocusPocus.Simulation.simulationDb.models;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-public class Layout {
+
+public class LayoutWithCells {
     
-    @JsonProperty("id")
+     @JsonProperty("id")
     
+     
     public Long id;
     public String name; 
 
     @JsonProperty("creation_date")
     public String creationDate;
 
+    public int[][] cells;
 
+
+    public String  direction;
 }

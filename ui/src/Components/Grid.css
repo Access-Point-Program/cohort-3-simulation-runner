@@ -33,26 +33,27 @@
     margin: 0px;
 }
 
-.cell-0 {
+.cell-white {
     background-color: white;
 }
 
-.cell-1 {
+.cell-grey{
     background-color: rgba(110, 110, 113, 0.371);
 }
 
-.cell-2 {
-    background-color: black;
-}
-
-.cell-3 {
-    background-color: rgb(187, 202, 187);
-}
-
-.cell-4 {
-    background-color: rgb(255, 157, 158);
-}
-
-.cell-5 {
+.cell-green {
     background-color: green;
+}
+
+.cell-red {
+    background-color: rgb(249, 0, 4);
+}
+
+
+.cell-light-green{
+    background-color: lightgreen;
+}
+
+.cell-barbie-pink{
+    background-color: #ff8686;
 }

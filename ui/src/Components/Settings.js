@@ -1,16 +1,14 @@
 import React from "react";
 import Select from "react-select";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Dropdown } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import "./settings.css";
-import { Provider } from 'react-redux'
-import Button from 'react-bootstrap/Button'
-//const rootElement = document.getElementById('root') root for styling i think
 
 import { useSelector, useDispatch } from 'react-redux'
 import { updateLayout, updateRuleset, updateMaxIterations } from '../store/settingsSlice';
 import { useGetRuleSetsQuery } from '../store/ruleSetsSlice';
-import { useGetLayOutsQuery } from '../store/layOutsSlice';
+import { useGetLayoutsQuery } from '../store/layOutsSlice';
+import { runSimulation } from '../store/simulationSlice';
 
 function Settings() {
   // Hooks
@@ -18,25 +16,34 @@ function Settings() {
   const layoutId = useSelector((state) => state.settings.layoutId);
   const rulesetId = useSelector((state) => state.settings.rulesetId);
   const maxIterations = useSelector((state) => state.settings.maxIterations);
-  // Question: should we handle a possible error here?
-  const { data: rulesets = [], error, isLoading } = useGetRuleSetsQuery();
+  const { data: rulesets = [], error: rulesetsError, isLoading: rulesetsLoading } = useGetRuleSetsQuery();
+  const { data: layouts = [], error: layoutsError, isLoading: layoutsLoading } = useGetLayoutsQuery();
 
   // Event Handlers 
   const onSelectLayout = (selectedOption) => dispatch(updateLayout(selectedOption.value));
   const onSelectRuleset = (selectedOption) => dispatch(updateRuleset(selectedOption.value));
   const onChangeMaxIterations = (e) => dispatch(updateMaxIterations(e.target.value));
+  const onRunSimulationClick = () => {
+    dispatch(runSimulation({ rulesetId, layoutId, maxIterations }))
+      // https://redux-toolkit.js.org/api/createAsyncThunk#unwrapping-result-actions
+      .unwrap()
+      .then((resultsToSave) => {
+        // Save Results to the simulation API
+      });
+  };
 
   // Data Transformations
   const rulesetOptions = rulesets.map((ruleset) => ({ value: ruleset.id, label: ruleset.name }));
-  const layoutOptions = [];
+  const layoutOptions = layouts.map((layout) => ({ value: layout.id, label: layout.name }));;
   const selectedLayoutOption = layoutOptions.find(({ value }) => value === layoutId);
-  const selectedRulesetOption = rulesetOptions.find(({ value }) => value === rulesetId)
+  const selectedRulesetOption = rulesetOptions.find(({ value }) => value === rulesetId);
+  const canRunSimulation = layoutId !== null && rulesetId !== null;
 
   // View
   return (
     <Form className="settings-form">
       <Form.Label className="settings-title">Settings</Form.Label>
-      
+
       <div className="settings-divider"></div>
 
       <Select
@@ -44,6 +51,8 @@ function Settings() {
         value={selectedLayoutOption}
         onChange={onSelectLayout}
         options={layoutOptions}
+        isDisabled={layoutsLoading || layoutsError}
+        isLoading={layoutsLoading}
         placeholder="Layout"
       />
       <div className="settings-divider"></div>
@@ -52,9 +61,8 @@ function Settings() {
         value={selectedRulesetOption}
         onChange={onSelectRuleset}
         options={rulesetOptions}
-        // Question why are we disabling this select when it's loading or an error?
-        isDisabled={isLoading || error}
-        isLoading={isLoading}
+        isDisabled={rulesetsLoading || rulesetsError}
+        isLoading={rulesetsLoading}
         placeholder="Ruleset"
       />
       <div className="settings-divider"></div>
@@ -69,8 +77,13 @@ function Settings() {
         <Form.Control.Feedback type="invalid">Check!</Form.Control.Feedback>
       </Form.Group>
       <div className="settings-runButton">
-        {/* STOP AND ASK BEFORE YOU IMPLEMENT THIS!! Story #46 */}
-        <button type="button" className="settings-button">Run Simulation</button>
+        <button
+          type="button"
+          className="btn btn-primary"
+          disabled={!canRunSimulation}
+          onClick={onRunSimulationClick}>
+            Run Simulation
+        </button>
       </div>
     </Form >
   );
